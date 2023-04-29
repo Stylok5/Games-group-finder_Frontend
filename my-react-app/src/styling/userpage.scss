@@ -1,0 +1,159 @@
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2rem;
+}
+
+.profile-details {
+  margin: 1rem;
+  border: 1px solid #ccc;
+  padding: 1rem;
+  border-radius: 5px;
+  width: 30em;
+}
+
+.profile-details li {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0.5rem;
+}
+
+.profile-details strong {
+  margin-right: 0.5rem;
+}
+
+.profile-details input {
+  margin-left: 0.5rem;
+}
+
+.normal-img {
+  width: 150px;
+  height: 150px;
+  margin-left: 5rem;
+  border-radius: 50%;
+}
+
+.preview-img {
+  width: 130px;
+  height: 130px;
+  margin-left: 16em;
+  border-radius: 50%;
+}
+.profile-details button {
+  margin: 0.5rem;
+}
+
+.group-box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1rem;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 50em;
+}
+
+.group-details {
+  display: flex;
+  flex-direction: column;
+  margin-right: 1rem;
+}
+
+.group-details div {
+  margin: 0.5rem;
+}
+
+.group-details a {
+  text-decoration: none;
+  color: #333;
+}
+
+.group-delete {
+  display: flex;
+  align-items: center;
+}
+
+.group-delete button {
+  background-color: #f44336;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem;
+  margin: 0.5rem;
+}
+.group-delete button:hover {
+  background-color: #fff;
+  color: #f44336;
+  border: 1px solid #f44336;
+}
+
+.list-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2rem;
+}
+
+.list-form input {
+  margin: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.listBtn {
+  margin: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  border: none;
+  background-color: #4caf50;
+  color: #fff;
+}
+
+.listBtn:hover {
+  cursor: pointer;
+  background-color: #3e8e41;
+}
+
+.dropdown-games {
+  margin: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: #333;
+}
+
+.dropdown-menu {
+  max-height: 200px;
+  overflow-y: scroll;
+}
+
+.scrollable-menu {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  margin: 0;
+}
+
+.dropdown-item:hover {
+  cursor: pointer;
+  background-color: #f2f2f2;
+}
+
+.dropdown-item:focus {
+  background-color: #f2f2f2;
+}
+
+.profile-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.previewimg {
+  margin-left: 20px;
+}

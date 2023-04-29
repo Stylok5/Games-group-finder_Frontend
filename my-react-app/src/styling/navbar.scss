@@ -1,0 +1,149 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+.navitem {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 8px;
+  margin: 0 auto 1.5em auto;
+  height: 8vh;
+  background-color: rgb(255, 254, 254);
+  position: relative;
+  top: 15px;
+}
+
+.foot {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 8px;
+  margin: 0 auto 1.5em auto;
+  height: 8vh;
+  background-color: rgb(210, 213, 214);
+  position: relative;
+  top: 15px;
+}
+
+li {
+  list-style: none;
+}
+ul {
+  gap: 2.5em;
+  margin-bottom: 0 !important;
+}
+
+.primary-nav {
+  display: flex;
+  justify-content: flex-start;
+  margin-left: 4em;
+}
+
+.secondary-nav {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 7em;
+
+  & img {
+    width: 30px;
+    height: 30px;
+    margin-left: 16em;
+    border-radius: 50%;
+  }
+}
+.primary-nav a {
+  text-decoration: none !important;
+  color: black !important;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.primary-nav a:hover {
+  color: rgb(219, 22, 199) !important;
+}
+
+.secondary-nav a {
+  text-decoration: none !important;
+  color: black !important;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.secondary-nav a:hover {
+  color: rgb(219, 22, 199) !important;
+}
+// a {
+//   text-decoration: none !important;
+//   color: black !important;
+//   cursor: pointer;
+//   font-weight: 600;
+// }
+// a:hover {
+//   color: rgb(219, 22, 199) !important;
+// }
+
+.donut {
+  margin: 6px 0 0 6px;
+  width: 2px;
+}
+
+//Footer
+footer {
+  height: 12vh;
+  width: 100%;
+  background-color: rgb(210, 213, 214);
+  //background-color: #266388;
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.user-info-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.user-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.user-name {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.user-info-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.user-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+ul.secondary-nav {
+  width: 18em;
+}
+
+.nav-item-logout {
+  margin-top: 3px;
+}
