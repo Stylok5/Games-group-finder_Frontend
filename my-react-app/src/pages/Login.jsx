@@ -2,7 +2,6 @@ import { useState } from "react";
 import axios from "axios";
 import { DEV_API_AUTH } from "../consts-data";
 import { useNavigate } from "react-router-dom";
-
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
@@ -37,13 +36,15 @@ const Login = () => {
     } catch (err) {
       console.log(err.response.data.detail);
       setError(err.response.data.detail);
+      setTimeout(() => {
+        setError("");
+      }, 3000);
     }
   };
+
   return (
     <div className="main-form">
-      <div className="back-form"></div>
       <span className="form-body">
-        <h1 className="form-title">Login</h1>
         <form onSubmit={onSubmit}>
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
             <Form.Control
@@ -63,23 +64,23 @@ const Login = () => {
               value={formData.password}
             />
           </Form.Group>
-          {buttonActive ? (
-            <Button
-              className="form-btn"
-              variant="primary"
-              type="submit"
-              size="lg"
-              active
-            >
-              Login
-            </Button>
-          ) : (
+          {!formData.email && !formData.password ? (
             <Button
               className="form-btn"
               variant="secondary"
               type="submit"
               size="lg"
               disabled
+            >
+              Login
+            </Button>
+          ) : (
+            <Button
+              className="form-btn"
+              variant="primary"
+              type="submit"
+              size="lg"
+              active
             >
               Login
             </Button>

@@ -59,46 +59,44 @@ const Register = () => {
 
   return (
     <div className="main-form">
-      <div className="back-form-register"></div>
-      <span className="form-body">
-        <h1 className="form-title">Register</h1>
-        <form onSubmit={onSubmit}>
-          <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-            <Form.Control
-              type="text"
-              placeholder="Username"
-              name="username"
-              onChange={onChange}
-              value={formData.username}
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-            <Form.Control
-              type="email"
-              placeholder="Email"
-              name="email"
-              value={formData.email}
-              onChange={onChange}
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-            <Form.Control
-              type="password"
-              onChange={onChange}
-              placeholder="Password"
-              name="password"
-              value={formData.password}
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-            <Form.Control
-              type="password"
-              placeholder="Confirm Password"
-              name="password_confirmation"
-              onChange={onChange}
-              value={formData.password_confirmation}
-            />
-          </Form.Group>
+      <form className="form-body" onSubmit={onSubmit}>
+        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+          <Form.Control
+            type="text"
+            placeholder="Username"
+            name="username"
+            onChange={onChange}
+            value={formData.username}
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+          <Form.Control
+            type="email"
+            placeholder="Email"
+            name="email"
+            value={formData.email}
+            onChange={onChange}
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+          <Form.Control
+            type="password"
+            onChange={onChange}
+            placeholder="Password"
+            name="password"
+            value={formData.password}
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+          <Form.Control
+            type="password"
+            placeholder="Confirm Password"
+            name="password_confirmation"
+            onChange={onChange}
+            value={formData.password_confirmation}
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
           <Form.Control
             type="text"
             name="profile_image"
@@ -106,6 +104,8 @@ const Register = () => {
             value={formData.profile_image}
             onChange={onChange}
           />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
           <Form.Control
             type="text"
             placeholder="Description(not required)"
@@ -113,6 +113,8 @@ const Register = () => {
             onChange={onChange}
             value={formData.description}
           />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
           <Form.Control
             type="text"
             placeholder="Discord link(not required)"
@@ -120,33 +122,37 @@ const Register = () => {
             onChange={onChange}
             value={formData.discord_link}
           />
-          {buttonActive ? (
-            <Button
-              className="form-btn"
-              variant="primary"
-              type="submit"
-              size="lg"
-              active
-            >
-              Register
-            </Button>
-          ) : (
-            <Button
-              className="form-btn"
-              variant="secondary"
-              type="submit"
-              size="lg"
-              disabled
-            >
-              Register
-            </Button>
-          )}
-          {formData.status}
-          {error && (
-            <h4 className="error">{<pre className="error">{error}</pre>}</h4>
-          )}
-        </form>
-      </span>
+        </Form.Group>
+        {!formData.username &&
+        !formData.email &&
+        !formData.password &&
+        !formData.password_confirmation &&
+        !formData.profile_image &&
+        !formData.description &&
+        !formData.discord_link ? (
+          <Button
+            className="form-btn"
+            variant="secondary"
+            type="submit"
+            size="lg"
+            disabled
+          >
+            Register
+          </Button>
+        ) : (
+          <Button
+            className="form-btn"
+            variant="primary"
+            type="submit"
+            size="lg"
+            active
+          >
+            Register
+          </Button>
+        )}
+        {formData.status}
+        <h5 className="error">{error}</h5>
+      </form>
     </div>
   );
 };

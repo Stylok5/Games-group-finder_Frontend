@@ -21,34 +21,43 @@ const GamePage = () => {
 
   return (
     <div className="gamePage">
-      <ul key="title">
-        <div className="card">
-          <div className="card-body">
-            <h1>{game.title}</h1>
-            <li>{game.release_date}</li>
-            <li>{game.genre && game.genre.map((item) => item.name)} </li>
+      <div className="card">
+        <div className="card-body">
+          <h1>{game.title}</h1>
+          <ul>
+            <li>
+              <span>Release date: </span>
+              {game.release_date}
+            </li>
+            <li>
+              <span>Platforms: </span>
+              {game.platforms}
+            </li>
+            <li>
+              <span>Genre: </span>
+              {game.genre && game.genre.map((item) => item.name)}
+            </li>
             <li>
               <img className="exploreImg" src={game.image} />
             </li>
-            <li>{game.description}</li>
             <li>
-              <div style={{ height: "200px", overflow: "scroll" }}>
-                {" "}
-                {game.groups &&
-                  game.groups.map((item, ind) => (
-                    <ul key={ind}>
-                      <Link to={`/groups/${item.id}`}>
-                        <h3>{item.name}</h3>
-                      </Link>
-                      by {item.owner.username}
-                      <li>{item.description}</li>
-                    </ul>
-                  ))}
-              </div>
+              <span>Description: </span>
+              {game.description}
             </li>
+          </ul>
+          <h2>Groups</h2>
+          <div className="gamepagetext">
+            {game.groups &&
+              game.groups.map((item, ind) => (
+                <Link to={`/groups/${item.id}`}>
+                  <ul key={ind}>
+                    <h3 style={{ display: "inline" }}>{item.name}</h3>
+                  </ul>
+                </Link>
+              ))}
           </div>
         </div>
-      </ul>
+      </div>
     </div>
   );
 };

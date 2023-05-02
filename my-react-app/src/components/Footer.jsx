@@ -57,7 +57,12 @@ const Footer = () => {
               {loggedIn && (
                 <li className="nav-item user-info">
                   <div className="user-info-wrapper">
-                    <img className="user-avatar" src={user.profile_image} />
+                    {user.profile_image ? (
+                      <img className="user-avatar" src={user.profile_image} />
+                    ) : (
+                      <span style={{ visibility: "hidden" }}></span>
+                    )}
+
                     <span className="user-name">
                       {" "}
                       <Link to={`/users/${user.id}`}>{user.username}</Link>

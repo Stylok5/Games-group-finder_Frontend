@@ -11,6 +11,7 @@ const UserPage = () => {
   const [currentUser, setCurrentUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
   const { userId } = useParams();
+  const [error, setError] = useState("");
 
   useEffect(() => {
     setLoggedIn(localStorage.getItem("token") ? true : false);
@@ -99,7 +100,11 @@ const UserPage = () => {
       setUser(res1.data);
       console.log(res1.data);
     } catch (err) {
-      console.log(err.response.data);
+      console.log(err.response.data.error);
+      setError(err.response.data.error);
+      setTimeout(() => {
+        setError("");
+      }, 3000);
     }
   };
 
@@ -157,7 +162,17 @@ const UserPage = () => {
       //   const res2 = await axios.get(`${DEV_API_AUTH}/user/`);
       setCurrentUser(res1);
     } catch (err) {
-      console.log(err);
+      console.log(err.response.data.error);
+      setError(err.response.data.error);
+      setTimeout(() => {
+        setError("");
+      }, 3000);
+    }
+  };
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      updateUser(e);
     }
   };
 
@@ -173,43 +188,44 @@ const UserPage = () => {
   };
 
   return (
-    <>
+    <div className="userpage">
       <div className="usercontainer">
-        <li>
-          <div className=" profile-details ">
-            <strong>Username:</strong>{" "}
-            {isEditing ? (
+        <div className="profile-details">
+          <strong>Username:</strong>{" "}
+          {isEditing ? (
+            <input
+              name="username"
+              className="input-group-text"
+              id="addon-wrapping"
+              value={formData.username}
+              onChange={onChange}
+              onKeyDown={handleKeyDown}
+            />
+          ) : (
+            user.username
+          )}
+          <h5 className="error">{error}</h5>
+        </div>
+        <div className=" profile-details ">
+          <strong>Image:</strong>{" "}
+          {isEditing ? (
+            <>
               <input
-                name="username"
+                name="profile_image"
                 className="input-group-text"
                 id="addon-wrapping"
-                value={formData.username}
+                value={formData.profile_image}
                 onChange={onChange}
+                onKeyDown={handleKeyDown}
               />
-            ) : (
-              user.username
-            )}
-          </div>
-        </li>
-        <li>
-          <div className=" profile-details ">
-            <strong>Image:</strong>{" "}
-            {isEditing ? (
-              <>
-                <input
-                  name="profile_image"
-                  className="input-group-text"
-                  id="addon-wrapping"
-                  value={formData.profile_image}
-                  onChange={onChange}
-                />
-                <img className="preview-img" src={previewImage} />
-              </>
-            ) : (
-              <img className="normal-img" src={user.profile_image} />
-            )}
-          </div>
-        </li>
+              <img className="preview-img" src={previewImage} />
+            </>
+          ) : user.profile_image ? (
+            <img className="normal-img" src={user.profile_image} />
+          ) : (
+            <span style={{ visibility: "hidden" }}></span>
+          )}
+        </div>
         <li>
           <div className=" profile-details ">
             <strong>Description:</strong>{" "}
@@ -220,12 +236,13 @@ const UserPage = () => {
                 id="addon-wrapping"
                 value={formData.description}
                 onChange={onChange}
+                onKeyDown={handleKeyDown}
               />
             ) : (
               user.description
             )}
           </div>
-          <div className=" profile-details ">
+          <div className="profile-details ">
             <strong>Discord Link:</strong>{" "}
             {isEditing ? (
               <input
@@ -233,67 +250,86 @@ const UserPage = () => {
                 className="input-group-text"
                 id="addon-wrapping"
                 value={formData.discord_link}
-                onChange={onChange}
+                onKeyDown={handleKeyDown}
               />
             ) : (
               user.discord_link
             )}
           </div>
         </li>
-      </div>
-      <div>
-        {isCurrentUser && loggedIn && (
-          <>
-            {isEditing ? (
-              <li>
-                <button onClick={updateUser}>Save Changes</button>
-                <button onClick={handleCancel}>Cancel</button>
-              </li>
-            ) : (
-              <li>
-                <button onClick={handleEdit}>Edit Profile</button>
-              </li>
-            )}
-          </>
-        )}
-      </div>
 
+        <div>
+          {isCurrentUser && loggedIn && (
+            <>
+              {isEditing ? (
+                <li>
+                  <button onClick={updateUser}>Save Changes</button>
+                  <button onClick={handleCancel}>Cancel</button>
+                </li>
+              ) : (
+                <li>
+                  <button onClick={handleEdit}>Edit Profile</button>
+                </li>
+              )}
+            </>
+          )}
+        </div>
+      </div>
       <div className="groups-container">
         {user.groups &&
           user.groups.map((group) => (
-            <div key={group.id} className="group-box">
-              <div className="group-details">
-                <div>
-                  Created by{" "}
-                  <Link to={`/users/${group.owner.id}`}>
-                    {group.owner.username}
-                  </Link>{" "}
-                  for {group.game}
-                </div>
-                <div>
+            <Link
+              key={group.id}
+              className="group-box"
+              to={`/groups/${group.id}`}
+            >
+              <ul className="group-details">
+                <li>
+                  {group.owner.email === user.email ? (
+                    <span>Group's owner</span>
+                  ) : (
+                    <div>
+                      <span>Created by </span>
+                      <Link
+                        className="owner-username"
+                        to={`/users/${group.owner.id}`}
+                      >
+                        {group.owner.username}
+                      </Link>
+                    </div>
+                  )}
+                </li>
+                <li>
+                  <span>Game:</span> {group.game}
+                </li>
+
+                <li>
+                  <span>Group title:</span>{" "}
                   <Link className="group-link" to={`/groups/${group.id}`}>
                     {group.name}
-                  </Link>{" "}
-                  {group.description}
-                </div>
-              </div>
+                  </Link>
+                </li>
+                <li>
+                  <span>Description:</span> {group.description}
+                </li>
+              </ul>
               <div className="group-delete">
                 {group.owner.email === currentUser.email && (
-                  <button
+                  <Link
                     onClick={(e) => {
+                      e.stopPropagation();
                       removeGroup(group.id);
                     }}
                     className="delete-button"
                   >
                     Delete group
-                  </button>
+                  </Link>
                 )}
               </div>
-            </div>
+            </Link>
           ))}
-
-        {isCurrentUser && loggedIn && (
-          <li>
+        <div className="creategroupcontainer">
+          {isCurrentUser && loggedIn && (
             <Card>
               <Card.Body>
                 <form className="list-form" onSubmit={createGroup}>
@@ -315,34 +351,41 @@ const UserPage = () => {
                       </div>
                     </Dropdown.Menu>
                   </Dropdown>
-                  <input
-                    className="review-input"
-                    type="text"
-                    placeholder="group name"
-                    name="name"
-                    value={group.name}
-                    onChange={onChangeHandler}
-                    required
-                  />
-                  <input
-                    className="review-input"
-                    type="text"
-                    placeholder="group description"
-                    name="description"
-                    value={group.description}
-                    onChange={onChangeHandler}
-                    required
-                  />
-                  <Button className="listBtn" variant="light" type="submit">
-                    Create a group
-                  </Button>
+                  <div className="form-group">
+                    <input
+                      className="form-control"
+                      type="text"
+                      placeholder="group name"
+                      name="name"
+                      value={group.name}
+                      onChange={onChangeHandler}
+                      required
+                    />
+                  </div>
+                  <div className="form-group">
+                    <input
+                      className="form-control"
+                      type="text"
+                      placeholder="group description"
+                      name="description"
+                      value={group.description}
+                      onChange={onChangeHandler}
+                      required
+                    />
+                  </div>
+                  <div className="form-group">
+                    <Button className="listBtn" variant="light" type="submit">
+                      Create a group
+                    </Button>
+                    <h5 className="error">{error}</h5>
+                  </div>
                 </form>
               </Card.Body>
             </Card>
-          </li>
-        )}
+          )}
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 

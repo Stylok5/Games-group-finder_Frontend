@@ -43,13 +43,7 @@ const NavBar = () => {
   };
 
   return (
-    <CircleMenu
-      className="donut"
-      startAngle={0}
-      totalAngle={150}
-      radius={40}
-      hideEmptyCircle
-    >
+    <CircleMenu className="donut" startAngle={0} totalAngle={150} radius={25}>
       <CircleMenuItem>
         <nav className="navitem">
           <ul className="primary-nav">
@@ -65,7 +59,11 @@ const NavBar = () => {
                 {loggedIn && (
                   <li className="nav-item user-info">
                     <div className="user-info-wrapper">
-                      <img className="user-avatar" src={user.profile_image} />
+                      {user.profile_image ? (
+                        <img className="user-avatar" src={user.profile_image} />
+                      ) : (
+                        <span style={{ visibility: "hidden" }}></span>
+                      )}
                       <span>
                         {" "}
                         <Link to={`/users/${user.id}`}>{user.username}</Link>
@@ -73,7 +71,6 @@ const NavBar = () => {
                     </div>
                   </li>
                 )}
-
                 <li className="nav-item-logout" onClick={onLogout}>
                   <Link className="linksnavbar" to="/logout">
                     Logout

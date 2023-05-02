@@ -8,7 +8,7 @@ const Browse = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(null);
   const PAGE_SIZE = 10;
-
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     const getGames = async (page) => {
       try {
@@ -74,26 +74,25 @@ const Browse = () => {
           <div className="games-grid">
             {games &&
               games.map((game, ind) => (
-                <div key={ind} className="game-card">
-                  <Link className="game-link" to={`/games/${game.id}`}>
+                <Link className="game-link" to={`/games/${game.id}`}>
+                  <div key={ind} className="game-card">
                     <img
                       className="game-image"
                       src={game.image}
                       alt={game.title}
                     />
                     <h5 className="game-title">{game.title}</h5>
-                    <p className="game-release-date">
-                      Release date: {game.release_date}
-                    </p>
-                  </Link>
-                  <a
-                    className="officialLink"
-                    href={game.official_site}
-                    target="_blank"
-                  >
-                    Official Site
-                  </a>
-                </div>
+
+                    <a
+                      className="officialLink"
+                      href={game.official_site}
+                      target="_blank"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      Official Site
+                    </a>
+                  </div>
+                </Link>
               ))}
           </div>
         </div>
