@@ -6,7 +6,8 @@ import Button from "react-bootstrap/Button";
 import { DEV_API_AUTH } from "../consts-data";
 
 const Register = () => {
-  const [error, setError] = useState("");
+  const [errorInvalid, setErrorInvalid] = useState("");
+  const [errorExists, setErrorExists] = useState("");
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -30,9 +31,9 @@ const Register = () => {
     e.preventDefault();
     try {
       if (formData.password.length < 7 || formData.username.length < 3) {
-        setError("Invalid input please try again");
+        setErrorInvalid("Invalid input please try again");
         setTimeout(() => {
-          setError("");
+          setErrorInvalid("");
         }, 3000);
       } else {
         const res = await axios.post(`${DEV_API_AUTH}/register/`, formData);
@@ -50,16 +51,16 @@ const Register = () => {
         errorMessages.push(err.response.data.username.join(", "));
       }
       const errorMessage = errorMessages.join("\n");
-      setError(errorMessage);
+      setErrorExists(errorMessage);
       setTimeout(() => {
-        setError("");
+        setErrorExists("");
       }, 3000);
     }
   };
 
   return (
-    <div className="main-form">
-      <form className="form-body" onSubmit={onSubmit}>
+    <div className="main-form-register">
+      <form className="form-body-register" onSubmit={onSubmit}>
         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
           <Form.Control
             type="text"
@@ -100,7 +101,7 @@ const Register = () => {
           <Form.Control
             type="text"
             name="profile_image"
-            placeholder="Add an image URL(not required)"
+            placeholder="Add an image URL (optional)"
             value={formData.profile_image}
             onChange={onChange}
           />
@@ -108,7 +109,7 @@ const Register = () => {
         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
           <Form.Control
             type="text"
-            placeholder="Description(not required)"
+            placeholder="Description (optional)"
             name="description"
             onChange={onChange}
             value={formData.description}
@@ -117,7 +118,7 @@ const Register = () => {
         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
           <Form.Control
             type="text"
-            placeholder="Discord link(not required)"
+            placeholder="Discord link (optional)"
             name="discord_link"
             onChange={onChange}
             value={formData.discord_link}
@@ -150,8 +151,8 @@ const Register = () => {
             Register
           </Button>
         )}
-        {formData.status}
-        <h5 className="error">{error}</h5>
+        {errorInvalid && <h5 className="error">{errorInvalid}</h5>}
+        {errorExists && <h5 className="error-register2">{errorExists}</h5>}
       </form>
     </div>
   );

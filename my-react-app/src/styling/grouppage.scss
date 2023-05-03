@@ -1,11 +1,17 @@
 .groupPage {
   display: flex;
+  margin-top: 27px;
   justify-content: center;
+  background-color: black;
 }
 .groupscard {
   display: flex;
   justify-content: center;
   width: 90vw;
+}
+.group-info-section {
+  border-bottom: 1px solid #ccc;
+  padding: 5px 0;
 }
 .groupEdit {
   background-color: #4caf50;
@@ -23,7 +29,7 @@
 }
 
 .input-group-text {
-  width: 50%;
+  width: 20vw;
 }
 
 .groupEdit:hover {
@@ -36,8 +42,8 @@
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   background-color: #fff;
   border-radius: 5px;
-  margin-top: 30px;
-  margin-bottom: 50px;
+  margin-top: 8em;
+  margin-bottom: 8em;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
   padding: 20px;
   width: 70%;
@@ -52,11 +58,14 @@
   display: flex;
   flex-direction: column;
   padding: 5vh;
+  max-width: 100%;
+  overflow-wrap: break-word;
 }
 
 .chatbox {
   border-radius: 6px;
   height: 50vh;
+  margin-top: 3em;
   overflow: scroll;
   border: 1px solid #ccc;
   padding: 10px;
@@ -201,7 +210,9 @@
 .removeMember:hover {
   background-color: #c82333;
 }
-
+.removeMember:active {
+  transform: scale(0.9);
+}
 .ownertext {
   position: relative;
   top: 10px;
@@ -261,6 +272,9 @@
     text-decoration: underline;
     color: #0266d1 !important;
   }
+  a:active {
+    transform: scale(0.9);
+  }
 
   img {
     width: 5vw;
@@ -273,12 +287,12 @@
   display: flex;
   justify-content: end;
   position: relative;
-  right: 2vw;
+  right: 2.7vw;
   bottom: 2em;
 }
 
 .dropdownmembers .dropdown-menu {
-  width: 11vw;
+  width: 1px;
   height: 9vh;
   font-size: 15px;
 }
@@ -286,4 +300,197 @@
 .joinleavebtns {
   display: flex;
   justify-content: center;
+}
+
+.groupEdit:active {
+  transform: scale(0.9);
+}
+
+.leavebtn:active {
+  transform: scale(0.9);
+}
+
+.joinbtn:active {
+  transform: scale(0.9);
+}
+
+.savebtn:active {
+  transform: scale(0.9);
+}
+
+.cancelbtn:active {
+  transform: scale(0.9);
+}
+
+.owner {
+  position: relative;
+  bottom: 2px;
+}
+
+.removeMember:hover {
+  background-color: #c82333;
+}
+.submitbtn:active {
+  transform: scale(0.9);
+}
+
+@media (max-width: 768px) {
+  .inputmessage .form-control {
+    width: 20vw;
+    height: 3em;
+  }
+  .removeMember {
+    width: 4vw;
+    max-height: 2.5vh;
+    bottom: 1px;
+  }
+  .member img {
+    width: 25px;
+    height: auto;
+  }
+
+  .submitbtn {
+    height: 3em;
+    left: -6vw;
+    top: 11vh;
+    width: 6em;
+  }
+  .owner-info a {
+    font-size: 13px;
+  }
+  .dropdownmembers button {
+    padding: 0 1px 0 1px;
+    height: 50px;
+    width: 70px;
+    font-size: 10px;
+  }
+  .leavebtn {
+    margin-top: 2em;
+  }
+}
+
+.likestext {
+  margin-top: 10px;
+  margin-bottom: 4px;
+}
+
+.likebtn {
+  border: none;
+  padding: 15px;
+  position: relative;
+  bottom: 0.8vh;
+  right: 0.2vw;
+  cursor: pointer;
+  background-image: url("https://www.macmillandictionary.com/external/slideshow/full/emoji_thumbs-up_full.jpg");
+  background-position: center;
+  background-size: cover;
+}
+
+.dislikebtn {
+  border: none;
+  position: relative;
+  font-size: 18px;
+  left: 0.3vw;
+  bottom: 4px;
+  padding: 15px;
+  cursor: pointer;
+  background-image: url("https://www.macmillandictionary.com/external/slideshow/full/emoji_thumbs-down_full.jpg");
+  background-position: center;
+  background-size: cover;
+}
+
+.likebtn:hover {
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+.likebtn:active {
+  transform: scale(0.9);
+}
+.dislikebtn:hover {
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+.dislikebtn:active {
+  transform: scale(0.9);
+}
+
+.likedislikebtns {
+  width: 18em;
+  top: 60px;
+  position: relative;
+}
+
+.likesspan {
+  font-size: 18px;
+  position: relative;
+  top: 6px;
+  margin-left: 6px;
+}
+
+.spanlike {
+  font-weight: normal !important;
+}
+
+.spanlike,
+.dislikespan {
+  width: 30px;
+}
+.dislikespan {
+  font-weight: normal !important;
+  position: relative;
+  left: 12px;
+}
+
+.disabledlike {
+  border: none;
+  background-color: #007bff;
+  color: #fff;
+  padding: 15px;
+  position: relative;
+  bottom: 1.2vh;
+  right: 0.2vw;
+  opacity: 0.2;
+  cursor: pointer;
+  background-image: url("https://www.macmillandictionary.com/external/slideshow/full/emoji_thumbs-up_full.jpg");
+  background-position: center;
+  background-size: cover;
+}
+.disableddislike {
+  border: none;
+  padding: 15px;
+  position: relative;
+  bottom: 6px;
+  left: 3px;
+  opacity: 0.2;
+  cursor: pointer;
+  background-image: url("https://www.macmillandictionary.com/external/slideshow/full/emoji_thumbs-down_full.jpg");
+  background-position: center;
+  background-size: cover;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+  font-size: 18px;
+  animation-name: shake;
+  animation-duration: 0.5s;
+  animation-iteration-count: 3;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(10px);
+  }
+  50% {
+    transform: translateX(0);
+  }
+  75% {
+    transform: translateX(-10px);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }

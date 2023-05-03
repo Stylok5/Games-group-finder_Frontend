@@ -1,5 +1,7 @@
 .gamePage {
   display: flex;
+  margin-top: 2em;
+  background-color: black;
   justify-content: center;
 }
 
@@ -9,10 +11,11 @@
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   width: 70%;
   max-width: 1000px;
-  margin-bottom: 30px;
-  margin-top: 30px;
+  margin-bottom: 5em;
+  margin-top: 5em;
 
   h1 {
+    display: flex;
     font-size: 3rem;
     margin-bottom: 10px;
   }
@@ -63,10 +66,13 @@
     margin-top: 20px;
   }
 }
-
+.gamePage ul li {
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #ccc;
+}
 .gamepagetext {
   margin-top: 20px;
-  width: 50%;
+  width: 85%;
   height: 40vh;
   max-height: 40%;
   overflow: scroll;
@@ -86,6 +92,9 @@
 
   ul:hover {
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  }
+  ul:active {
+    transform: scale(0.9);
   }
   a {
     text-decoration: none;

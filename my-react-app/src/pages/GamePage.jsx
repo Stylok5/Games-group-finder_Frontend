@@ -52,6 +52,8 @@ const GamePage = () => {
                 <Link to={`/groups/${item.id}`}>
                   <ul key={ind}>
                     <h3 style={{ display: "inline" }}>{item.name}</h3>
+                    <p className="likestext">Likes: {item.likes}</p>
+                    <p>Dislikes: {item.dislikes}</p>
                   </ul>
                 </Link>
               ))}

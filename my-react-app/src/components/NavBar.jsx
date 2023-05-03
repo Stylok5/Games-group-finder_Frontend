@@ -71,6 +71,7 @@ const NavBar = () => {
                     </div>
                   </li>
                 )}
+
                 <li className="nav-item-logout" onClick={onLogout}>
                   <Link className="linksnavbar" to="/logout">
                     Logout

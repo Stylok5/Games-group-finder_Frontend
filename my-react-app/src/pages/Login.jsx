@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { DEV_API_AUTH } from "../consts-data";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
@@ -43,8 +43,8 @@ const Login = () => {
   };
 
   return (
-    <div className="main-form">
-      <span className="form-body">
+    <div className="main-form-login">
+      <span className="form-body-login">
         <form onSubmit={onSubmit}>
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
             <Form.Control
@@ -85,6 +85,11 @@ const Login = () => {
               Login
             </Button>
           )}
+          <div className="mt-3">
+            <p className="text-muted">
+              Don't have an account? <Link to="/register">Sign up</Link>
+            </p>
+          </div>
           {error && <h4 className="error">{error}</h4>}
         </form>
       </span>

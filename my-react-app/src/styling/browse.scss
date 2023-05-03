@@ -1,8 +1,9 @@
-.browsepage {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.browsePage {
+  margin-top: 2em;
+  background-color: black;
+  min-height: calc(100vh - 12vh);
 }
+
 .exploreImg {
   width: 15em;
 }
@@ -14,7 +15,10 @@
 }
 
 .page-item {
-  margin: 0.5rem;
+  margin-top: 4vh;
+}
+.page-item:active {
+  transform: scale(0.9);
 }
 
 .games-container {
@@ -26,8 +30,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   gap: 1em;
-  margin-bottom: 10vh;
-  margin-top: 2vh;
+  margin-top: 7vh;
 }
 
 .game-card {
@@ -62,7 +65,9 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   transform: translateY(-4px);
 }
-
+.game-card:active {
+  transform: scale(0.9);
+}
 .game-image {
   height: auto;
   width: 18em;

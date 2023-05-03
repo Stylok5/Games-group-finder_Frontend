@@ -11,7 +11,8 @@ const UserPage = () => {
   const [currentUser, setCurrentUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
   const { userId } = useParams();
-  const [error, setError] = useState("");
+  const [errorUser, setErrorUser] = useState("");
+  const [errorGroup, setErrorGroup] = useState("");
 
   useEffect(() => {
     setLoggedIn(localStorage.getItem("token") ? true : false);
@@ -101,9 +102,9 @@ const UserPage = () => {
       console.log(res1.data);
     } catch (err) {
       console.log(err.response.data.error);
-      setError(err.response.data.error);
+      setErrorGroup(err.response.data.error);
       setTimeout(() => {
-        setError("");
+        setErrorGroup("");
       }, 3000);
     }
   };
@@ -159,13 +160,13 @@ const UserPage = () => {
       console.log(res1);
       setIsEditing(false);
       window.location.reload();
-      //   const res2 = await axios.get(`${DEV_API_AUTH}/user/`);
+      const res2 = await axios.get(`${DEV_API_AUTH}/user/`);
       setCurrentUser(res1);
     } catch (err) {
       console.log(err.response.data.error);
-      setError(err.response.data.error);
+      setErrorUser(err.response.data.error);
       setTimeout(() => {
-        setError("");
+        setErrorUser("");
       }, 3000);
     }
   };
@@ -204,7 +205,7 @@ const UserPage = () => {
           ) : (
             user.username
           )}
-          <h5 className="error">{error}</h5>
+          <h5 className="error-user">{errorUser}</h5>
         </div>
         <div className=" profile-details ">
           <strong>Image:</strong>{" "}
@@ -258,7 +259,7 @@ const UserPage = () => {
           </div>
         </li>
 
-        <div>
+        <div className="editButtons">
           {isCurrentUser && loggedIn && (
             <>
               {isEditing ? (
@@ -274,6 +275,62 @@ const UserPage = () => {
             </>
           )}
         </div>
+      </div>
+      <div className="creategroupcontainer">
+        {isCurrentUser && loggedIn && (
+          <Card>
+            <Card.Body>
+              <form className="list-form" onSubmit={createGroup}>
+                <Dropdown>
+                  <Dropdown.Toggle variant="secondary" id="dropdown-games">
+                    {toggleText}
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu>
+                    <div className="scrollable-menu">
+                      {games &&
+                        games.map((game) => (
+                          <Dropdown.Item
+                            key={game.id}
+                            onClick={() => onSelectGame(game.title)}
+                          >
+                            {game.title}
+                          </Dropdown.Item>
+                        ))}
+                    </div>
+                  </Dropdown.Menu>
+                </Dropdown>
+                <div className="form-group">
+                  <input
+                    className="form-control"
+                    type="text"
+                    placeholder="group name"
+                    name="name"
+                    value={group.name}
+                    onChange={onChangeHandler}
+                    required
+                  />
+                </div>
+                <div className="form-group">
+                  <input
+                    className="form-control"
+                    type="text"
+                    placeholder="group description"
+                    name="description"
+                    value={group.description}
+                    onChange={onChangeHandler}
+                    required
+                  />
+                </div>
+                <div className="form-group">
+                  <Button className="listBtn" variant="light" type="submit">
+                    Create a group
+                  </Button>
+                  <h5 className="error-create">{errorGroup}</h5>
+                </div>
+              </form>
+            </Card.Body>
+          </Card>
+        )}
       </div>
       <div className="groups-container">
         {user.groups &&
@@ -310,7 +367,8 @@ const UserPage = () => {
                   </Link>
                 </li>
                 <li>
-                  <span>Description:</span> {group.description}
+                  <span className="descriptionText">Description:</span>{" "}
+                  {group.description}
                 </li>
               </ul>
               <div className="group-delete">
@@ -328,62 +386,6 @@ const UserPage = () => {
               </div>
             </Link>
           ))}
-        <div className="creategroupcontainer">
-          {isCurrentUser && loggedIn && (
-            <Card>
-              <Card.Body>
-                <form className="list-form" onSubmit={createGroup}>
-                  <Dropdown>
-                    <Dropdown.Toggle variant="secondary" id="dropdown-games">
-                      {toggleText}
-                    </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                      <div className="scrollable-menu">
-                        {games &&
-                          games.map((game) => (
-                            <Dropdown.Item
-                              key={game.id}
-                              onClick={() => onSelectGame(game.title)}
-                            >
-                              {game.title}
-                            </Dropdown.Item>
-                          ))}
-                      </div>
-                    </Dropdown.Menu>
-                  </Dropdown>
-                  <div className="form-group">
-                    <input
-                      className="form-control"
-                      type="text"
-                      placeholder="group name"
-                      name="name"
-                      value={group.name}
-                      onChange={onChangeHandler}
-                      required
-                    />
-                  </div>
-                  <div className="form-group">
-                    <input
-                      className="form-control"
-                      type="text"
-                      placeholder="group description"
-                      name="description"
-                      value={group.description}
-                      onChange={onChangeHandler}
-                      required
-                    />
-                  </div>
-                  <div className="form-group">
-                    <Button className="listBtn" variant="light" type="submit">
-                      Create a group
-                    </Button>
-                    <h5 className="error">{error}</h5>
-                  </div>
-                </form>
-              </Card.Body>
-            </Card>
-          )}
-        </div>
       </div>
     </div>
   );
