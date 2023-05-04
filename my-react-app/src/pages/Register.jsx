@@ -61,6 +61,7 @@ const Register = () => {
   return (
     <div className="main-form-register">
       <form className="form-body-register" onSubmit={onSubmit}>
+        <h2 className="registertitle">Register</h2>
         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
           <Form.Control
             type="text"
@@ -124,34 +125,38 @@ const Register = () => {
             value={formData.discord_link}
           />
         </Form.Group>
-        {!formData.username &&
-        !formData.email &&
-        !formData.password &&
-        !formData.password_confirmation &&
-        !formData.profile_image &&
-        !formData.description &&
-        !formData.discord_link ? (
-          <Button
-            className="form-btn"
-            variant="secondary"
-            type="submit"
-            size="lg"
-            disabled
-          >
-            Register
-          </Button>
-        ) : (
-          <Button
-            className="form-btn"
-            variant="primary"
-            type="submit"
-            size="lg"
-            active
-          >
-            Register
-          </Button>
-        )}
-        {errorInvalid && <h5 className="error">{errorInvalid}</h5>}
+        <div className="btncontainer">
+          <div className="registerbtn">
+            {!formData.username &&
+            !formData.email &&
+            !formData.password &&
+            !formData.password_confirmation &&
+            !formData.profile_image &&
+            !formData.description &&
+            !formData.discord_link ? (
+              <Button
+                className="form-btn"
+                variant="secondary"
+                type="submit"
+                size="lg"
+                disabled
+              >
+                Register
+              </Button>
+            ) : (
+              <Button
+                className="form-btn"
+                variant="primary"
+                type="submit"
+                size="lg"
+                active
+              >
+                Register
+              </Button>
+            )}
+          </div>
+        </div>
+        {errorInvalid && <h5 className="error-register1">{errorInvalid}</h5>}
         {errorExists && <h5 className="error-register2">{errorExists}</h5>}
       </form>
     </div>

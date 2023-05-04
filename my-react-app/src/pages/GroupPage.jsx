@@ -133,7 +133,6 @@ const GroupPage = () => {
         name: groupData.name,
         description: groupData.description,
       });
-      setGroup(res.data);
       setGroupData({ name: res.data.name, description: res.data.description });
       setOriginalGroupData({
         name: res.data.name,
@@ -141,7 +140,9 @@ const GroupPage = () => {
       });
       setEditable(false);
       setEditingField(null);
-      window.location.reload();
+      const res1 = await axios.get(`${DEV_API_GROUPSURL}/${groupId}/`);
+      setGroup(res1.data);
+      setGroup;
     } catch (err) {
       setError(err.response.data.error);
       console.log(err.response.data.error);
@@ -219,7 +220,7 @@ const GroupPage = () => {
       const res = await axios.post(`${DEV_API_GROUPSURL}/${groupId}/like/`);
       console.log(res);
       const res2 = await axios.get(`${DEV_API_GROUPSURL}/${groupId}`);
-      setGroup(res.data);
+      setGroup(res2.data);
       setClicked({ liked: true, disliked: true });
     } catch (err) {
       console.log(err);
@@ -243,6 +244,18 @@ const GroupPage = () => {
       <ul className="groupscard" key="title">
         <div className="cardetails">
           <div className="cardetails-body">
+            {!isOwner ? (
+              <h1 className="usertitle">
+                Log in and join a group. Chat with your fellow members and leave
+                a rating! Create or edit your own group by going to your user
+                page.
+              </h1>
+            ) : (
+              <h1 className="ownertitle">
+                Edit your group details. Remove members by opening the dropdown
+                menu
+              </h1>
+            )}
             {editable && editingField === "name" && isOwner ? (
               <div className="group-info-section">
                 <span className="nametext">Group name:</span>
@@ -385,7 +398,18 @@ const GroupPage = () => {
                               className="member-link"
                               to={`/users/${member.user}`}
                             >
-                              <img src={member.profile_image} />
+                              {member.profile_image ? (
+                                <img
+                                  src={member.profile_image}
+                                  alt={member.username}
+                                />
+                              ) : (
+                                <span
+                                  style={{
+                                    visibility: "hidden",
+                                  }}
+                                ></span>
+                              )}
                               {member.username}
                             </Link>
                           ) : (

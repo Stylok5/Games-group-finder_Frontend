@@ -1,14 +1,33 @@
 .form-body-login form {
   position: relative;
-  top: 60px;
+  top: 2rem;
+}
+
+.main-form-login {
+  display: flex;
+  background-image: linear-gradient(
+      0deg,
+      rgb(156, 152, 152),
+      rgba(156, 151, 151, 0.4)
+    ),
+    url("https://cdn.wallpapersafari.com/74/55/8RDqlF.jpg");
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 12vh);
+  width: 100vw;
 }
 
 .form-body-login {
   height: 70vh;
   width: 25vw;
-  top: 7vh;
+  top: 2vh;
   position: relative;
-  background-color: rgb(205, 203, 203);
+  background-image: linear-gradient(
+      0deg,
+      rgb(25, 24, 24),
+      rgba(156, 151, 151, 0.4)
+    ),
+    url("https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/d785543a-4d1a-4c2c-9023-ecbf90a7dd5f/dbe767e-75487324-b348-4d19-aea7-efaefa044619.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2Q3ODU1NDNhLTRkMWEtNGMyYy05MDIzLWVjYmY5MGE3ZGQ1ZlwvZGJlNzY3ZS03NTQ4NzMyNC1iMzQ4LTRkMTktYWVhNy1lZmFlZmEwNDQ2MTkucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.dIivHwqHzAMAnhb0qFo08X054O-_iIU9U4WRBgcmSxY");
   padding: 20px 30px 0 30px;
   border-radius: 10px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
@@ -34,13 +53,23 @@
     margin-bottom: 5em;
     margin-top: 5em;
   }
+  .form-body-login h2 {
+    font-size: 25px;
+  }
+  .logintitle {
+    font-size: 20px !important;
+  }
   .mt-3 {
-    position: relative;
-    bottom: 4em;
-    font-size: 11px;
+    font-size: 9px;
+    top: 3rem !important;
   }
 }
-
+.mt-3 {
+  text-align: center;
+  position: relative;
+  margin-bottom: auto;
+  top: 7rem;
+}
 .text-muted a {
   text-decoration: none;
 }
@@ -50,4 +79,64 @@
 }
 .text-muted a:active {
   color: #007bff;
+}
+
+.logintitle {
+  text-align: center;
+  position: relative;
+  font-size: 40px;
+  top: 4rem;
+}
+
+.loginbtn button {
+  width: 75%;
+  height: 50px;
+  position: relative;
+  top: 10vh;
+  left: 3vw;
+  border-radius: 5px;
+  font-size: 20px;
+}
+.loginbtn button:active {
+  transform: scale(0.9);
+}
+
+@media only screen and (max-width: 768px) {
+  .loginbtn button {
+    font-size: 17px;
+  }
+  .error-login {
+    margin-top: -4rem !important;
+    font-size: 14px !important;
+  }
+}
+
+.error-login {
+  color: red;
+  position: relative;
+  text-align: center;
+  top: 10rem;
+  font-weight: bold;
+  font-size: 20px;
+  animation-name: shake;
+  animation-duration: 0.5s;
+  animation-iteration-count: 3;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(10px);
+  }
+  50% {
+    transform: translateX(0);
+  }
+  75% {
+    transform: translateX(-10px);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }

@@ -21,17 +21,17 @@ const UserPage = () => {
     )
       ? `Bearer ${localStorage.getItem("token")}`
       : "";
-    console.log(localStorage);
+    // console.log(localStorage);
   }, [location]);
 
   useEffect(() => {
     const getCurrentUser = async () => {
       try {
         const res = await axios.get(`${DEV_API_AUTH}/user/`);
-        console.log(res);
+        // console.log(res);
         setCurrentUser(res.data);
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     };
     getCurrentUser();
@@ -42,9 +42,9 @@ const UserPage = () => {
       try {
         const res = await axios.get(`${DEV_API_AUTH}/users/${userId}`);
         setUser(res.data);
-        console.log(res);
+        // console.log(res);
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     };
     getUser();
@@ -56,8 +56,8 @@ const UserPage = () => {
     description: "",
   });
 
-  console.log(user);
-  console.log(currentUser);
+  // console.log(user);
+  // console.log(currentUser);
 
   const [games, setGames] = useState([]);
   useEffect(() => {
@@ -65,9 +65,9 @@ const UserPage = () => {
       try {
         const res = await axios.get(`${DEV_API_URL}`);
         setGames(res.data);
-        console.log(res.data);
+        // console.log(res.data);
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     };
     getGames();
@@ -80,17 +80,17 @@ const UserPage = () => {
       ...group,
       [e.target.name]: e.target.value,
     });
-    console.log(group);
+    // console.log(group);
   };
 
   const createGroup = async (e) => {
     e.preventDefault();
     try {
-      console.log("Group Name:", group.name);
-      console.log("Game Title:", group.title);
-      console.log("Group Description:", group.description);
+      // console.log("Group Name:", group.name);
+      // console.log("Game Title:", group.title);
+      // console.log("Group Description:", group.description);
       const res = await axios.post(`${DEV_API_GROUPSURL}/`, group);
-      console.log(res);
+      // console.log(res);
       setGroup({
         game: "",
         name: "",
@@ -99,9 +99,9 @@ const UserPage = () => {
       setToggleText("Select a game");
       const res1 = await axios.get(`${DEV_API_AUTH}/user`);
       setUser(res1.data);
-      console.log(res1.data);
+      // console.log(res1.data);
     } catch (err) {
-      console.log(err.response.data.error);
+      // console.log(err.response.data.error);
       setErrorGroup(err.response.data.error);
       setTimeout(() => {
         setErrorGroup("");
@@ -121,14 +121,14 @@ const UserPage = () => {
     username: currentUser.username,
     profile_image: currentUser.profile_image,
     description: currentUser.description,
-    discord_link: currentUser.discord_link,
+    discord_username: currentUser.discord_link,
   });
 
   const onChange = (e) => {
     if (e.target.name === "profile_image") {
       setPreviewImage(e.target.value);
     }
-    console.log(e.target.value);
+    // console.log(e.target.value);
     setPreviewImage(e.target.value);
     setFormData({ ...formData, [e.target.name]: e.target.value });
     setButtonActive(true);
@@ -139,12 +139,12 @@ const UserPage = () => {
       username: currentUser.username,
       profile_image: currentUser.profile_image,
       description: currentUser.description,
-      discord_link: currentUser.discord_link,
+      discord_username: currentUser.discord_username,
     });
   }, [currentUser]);
 
   const handleEdit = () => {
-    setCurrentUser(user);
+    setCurrentUser(currentUser);
     setIsEditing(true);
   };
 
@@ -159,11 +159,11 @@ const UserPage = () => {
       const res1 = await axios.put(`${DEV_API_AUTH}/user/`, formData);
       console.log(res1);
       setIsEditing(false);
-      window.location.reload();
+      // window.location.reload();
       const res2 = await axios.get(`${DEV_API_AUTH}/user/`);
-      setCurrentUser(res1);
+      setCurrentUser(res2.data);
     } catch (err) {
-      console.log(err.response.data.error);
+      // console.log(err.response.data.error);
       setErrorUser(err.response.data.error);
       setTimeout(() => {
         setErrorUser("");
@@ -184,13 +184,17 @@ const UserPage = () => {
       const res2 = await axios.get(`${DEV_API_AUTH}/user`);
       setUser(res2.data);
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 
   return (
     <div className="userpage">
       <div className="usercontainer">
+        <h1 className="userpagetitle">
+          Edit your user details. Create or delete a group and check out groups
+          you have joined.
+        </h1>
         <div className="profile-details">
           <strong>Username:</strong>{" "}
           {isEditing ? (
@@ -244,21 +248,21 @@ const UserPage = () => {
             )}
           </div>
           <div className="profile-details ">
-            <strong>Discord Link:</strong>{" "}
+            <strong>Discord Username:</strong>{" "}
             {isEditing ? (
               <input
-                name="discord_link"
+                name="discord_username"
                 className="input-group-text"
                 id="addon-wrapping"
-                value={formData.discord_link}
+                value={formData.discord_username}
+                onChange={onChange}
                 onKeyDown={handleKeyDown}
               />
             ) : (
-              user.discord_link
+              user.discord_username
             )}
           </div>
         </li>
-
         <div className="editButtons">
           {isCurrentUser && loggedIn && (
             <>

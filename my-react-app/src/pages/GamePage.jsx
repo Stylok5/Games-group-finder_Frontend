@@ -30,6 +30,10 @@ const GamePage = () => {
               {game.release_date}
             </li>
             <li>
+              <span>Developer: </span>
+              {game.developer}
+            </li>
+            <li>
               <span>Platforms: </span>
               {game.platforms}
             </li>
@@ -45,7 +49,7 @@ const GamePage = () => {
               {game.description}
             </li>
           </ul>
-          <h2>Groups</h2>
+          <h2 className="groupstitle">Groups</h2>
           <div className="gamepagetext">
             {game.groups &&
               game.groups.map((item, ind) => (
@@ -53,7 +57,7 @@ const GamePage = () => {
                   <ul key={ind}>
                     <h3 style={{ display: "inline" }}>{item.name}</h3>
                     <p className="likestext">Likes: {item.likes}</p>
-                    <p>Dislikes: {item.dislikes}</p>
+                    <p className="dislikestext">Dislikes: {item.dislikes}</p>
                   </ul>
                 </Link>
               ))}

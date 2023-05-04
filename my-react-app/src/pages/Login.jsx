@@ -45,6 +45,7 @@ const Login = () => {
   return (
     <div className="main-form-login">
       <span className="form-body-login">
+        <h2 className="logintitle">Log in</h2>
         <form onSubmit={onSubmit}>
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
             <Form.Control
@@ -64,33 +65,35 @@ const Login = () => {
               value={formData.password}
             />
           </Form.Group>
-          {!formData.email && !formData.password ? (
-            <Button
-              className="form-btn"
-              variant="secondary"
-              type="submit"
-              size="lg"
-              disabled
-            >
-              Login
-            </Button>
-          ) : (
-            <Button
-              className="form-btn"
-              variant="primary"
-              type="submit"
-              size="lg"
-              active
-            >
-              Login
-            </Button>
-          )}
+          <div className="loginbtn">
+            {!formData.email && !formData.password ? (
+              <Button
+                className="form-btn"
+                variant="secondary"
+                type="submit"
+                size="lg"
+                disabled
+              >
+                Login
+              </Button>
+            ) : (
+              <Button
+                className="form-btn"
+                variant="primary"
+                type="submit"
+                size="lg"
+                active
+              >
+                Login
+              </Button>
+            )}
+          </div>
           <div className="mt-3">
             <p className="text-muted">
               Don't have an account? <Link to="/register">Sign up</Link>
             </p>
           </div>
-          {error && <h4 className="error">{error}</h4>}
+          {error && <h4 className="error-login">{error}</h4>}
         </form>
       </span>
     </div>
