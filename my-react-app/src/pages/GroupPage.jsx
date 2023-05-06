@@ -9,7 +9,6 @@ import { DEV_API_AUTH } from "../consts-data";
 import Form from "react-bootstrap/Form";
 import { Modal } from "react-bootstrap";
 import { OverlayTrigger, Popover } from "react-bootstrap";
-
 const GroupPage = () => {
   const location = useLocation();
   const { groupId } = useParams();
@@ -142,7 +141,7 @@ const GroupPage = () => {
       // setGroup;
     } catch (err) {
       setShowAlert(true);
-
+      setError(err.response.data.error);
       console.log(err.response.data.error);
       setTimeout(() => {
         setShowAlert(false);

@@ -22,14 +22,11 @@ const Browse = () => {
         console.log(err);
       }
     };
-
-    // Call getGames to fetch games for the first page
+    
     getGames(currentPage);
 
-    // Store getGames in a variable for later use
     const handleGetGames = getGames;
 
-    // Return cleanup function to remove the event listener
     return () => {
       window.removeEventListener("popstate", handlePopstate);
     };
