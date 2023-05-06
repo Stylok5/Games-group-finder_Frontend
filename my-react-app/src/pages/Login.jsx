@@ -4,6 +4,7 @@ import { DEV_API_AUTH } from "../consts-data";
 import { Link, useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import { Modal } from "react-bootstrap";
 
 const Login = () => {
   const [error, setError] = useState("");
@@ -21,6 +22,8 @@ const Login = () => {
 
   const navigate = useNavigate();
 
+  const [showAlert, setShowAlert] = useState(false);
+
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -34,10 +37,11 @@ const Login = () => {
       setFormData(formData);
       navigate("/browse");
     } catch (err) {
+      setShowAlert(true);
       console.log(err.response.data.detail);
       setError(err.response.data.detail);
       setTimeout(() => {
-        setError("");
+        setShowAlert(false);
       }, 3000);
     }
   };
@@ -45,56 +49,78 @@ const Login = () => {
   return (
     <div className="main-form-login">
       <span className="form-body-login">
-        <h2 className="logintitle">Log in</h2>
-        <form onSubmit={onSubmit}>
-          <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-            <Form.Control
-              type="email"
-              placeholder="Email"
-              name="email"
-              value={formData.email}
-              onChange={onChange}
-            />
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Control
-              type="password"
-              onChange={onChange}
-              placeholder="Password"
-              name="password"
-              value={formData.password}
-            />
-          </Form.Group>
-          <div className="loginbtn">
-            {!formData.email && !formData.password ? (
-              <Button
-                className="form-btn"
-                variant="secondary"
-                type="submit"
-                size="lg"
-                disabled
+        <div className="insidecard">
+          <h2 className="logintitle">Log in</h2>
+          <form onSubmit={onSubmit}>
+            <div className="inputs">
+              <Form.Group
+                className="mb-3"
+                controlId="exampleForm.ControlInput1"
               >
-                Login
-              </Button>
-            ) : (
-              <Button
-                className="form-btn"
-                variant="primary"
-                type="submit"
-                size="lg"
-                active
-              >
-                Login
-              </Button>
+                <Form.Control
+                  type="email"
+                  placeholder="Email"
+                  name="email"
+                  value={formData.email}
+                  onChange={onChange}
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Control
+                  type="password"
+                  onChange={onChange}
+                  placeholder="Password"
+                  name="password"
+                  value={formData.password}
+                />
+              </Form.Group>
+            </div>
+            <div className="loginbtn">
+              {!formData.email && !formData.password ? (
+                <Button
+                  className="form-btn"
+                  variant="secondary"
+                  type="submit"
+                  size="lg"
+                  disabled
+                >
+                  Login
+                </Button>
+              ) : (
+                <Button
+                  className="form-btn"
+                  variant="primary"
+                  type="submit"
+                  size="lg"
+                  active
+                >
+                  Login
+                </Button>
+              )}
+              <div className="mt-3">
+                <p className="text-muted">
+                  Don't have an account? <Link to="/register">Sign up</Link>
+                </p>
+              </div>
+            </div>
+            {error && (
+              <Modal show={showAlert} onHide={() => setShowAlert(false)}>
+                <Modal.Header closeButton>
+                  <Modal.Title>Error</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>{error}</Modal.Body>
+                <Modal.Footer>
+                  <Button
+                    variant="secondary"
+                    onClick={() => setShowAlert(false)}
+                  >
+                    Close
+                  </Button>
+                </Modal.Footer>
+              </Modal>
             )}
-          </div>
-          <div className="mt-3">
-            <p className="text-muted">
-              Don't have an account? <Link to="/register">Sign up</Link>
-            </p>
-          </div>
-          {error && <h4 className="error-login">{error}</h4>}
-        </form>
+          </form>
+        </div>
       </span>
     </div>
   );

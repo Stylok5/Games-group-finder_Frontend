@@ -5,6 +5,8 @@ import Button from "react-bootstrap/Button";
 import Dropdown from "react-bootstrap/Dropdown";
 import { Link, useParams } from "react-router-dom";
 import Card from "react-bootstrap/Card";
+import { Modal } from "react-bootstrap";
+import { OverlayTrigger, Popover } from "react-bootstrap";
 
 const UserPage = () => {
   const [user, setUser] = useState({});
@@ -21,17 +23,17 @@ const UserPage = () => {
     )
       ? `Bearer ${localStorage.getItem("token")}`
       : "";
-    // console.log(localStorage);
+    console.log(localStorage);
   }, [location]);
 
   useEffect(() => {
     const getCurrentUser = async () => {
       try {
         const res = await axios.get(`${DEV_API_AUTH}/user/`);
-        // console.log(res);
+        console.log(res);
         setCurrentUser(res.data);
       } catch (err) {
-        // console.log(err);
+        console.log(err);
       }
     };
     getCurrentUser();
@@ -42,9 +44,9 @@ const UserPage = () => {
       try {
         const res = await axios.get(`${DEV_API_AUTH}/users/${userId}`);
         setUser(res.data);
-        // console.log(res);
+        console.log(res);
       } catch (err) {
-        // console.log(err);
+        console.log(err);
       }
     };
     getUser();
@@ -56,8 +58,8 @@ const UserPage = () => {
     description: "",
   });
 
-  // console.log(user);
-  // console.log(currentUser);
+  console.log(user);
+  console.log(currentUser);
 
   const [games, setGames] = useState([]);
   useEffect(() => {
@@ -65,9 +67,9 @@ const UserPage = () => {
       try {
         const res = await axios.get(`${DEV_API_URL}`);
         setGames(res.data);
-        // console.log(res.data);
+        console.log(res.data);
       } catch (err) {
-        // console.log(err);
+        console.log(err);
       }
     };
     getGames();
@@ -80,17 +82,17 @@ const UserPage = () => {
       ...group,
       [e.target.name]: e.target.value,
     });
-    // console.log(group);
+    console.log(group);
   };
-
+  const [showAlert, setShowAlert] = useState(false);
   const createGroup = async (e) => {
     e.preventDefault();
     try {
-      // console.log("Group Name:", group.name);
-      // console.log("Game Title:", group.title);
-      // console.log("Group Description:", group.description);
+      console.log("Group Name:", group.name);
+      console.log("Game Title:", group.title);
+      console.log("Group Description:", group.description);
       const res = await axios.post(`${DEV_API_GROUPSURL}/`, group);
-      // console.log(res);
+      console.log(res);
       setGroup({
         game: "",
         name: "",
@@ -99,12 +101,14 @@ const UserPage = () => {
       setToggleText("Select a game");
       const res1 = await axios.get(`${DEV_API_AUTH}/user`);
       setUser(res1.data);
-      // console.log(res1.data);
+      console.log(res1.data);
     } catch (err) {
-      // console.log(err.response.data.error);
+      console.log(err.response.data.error);
       setErrorGroup(err.response.data.error);
+      setShowAlert(true);
       setTimeout(() => {
-        setErrorGroup("");
+        // setErrorGroup("");
+        setShowAlert(false);
       }, 3000);
     }
   };
@@ -121,14 +125,14 @@ const UserPage = () => {
     username: currentUser.username,
     profile_image: currentUser.profile_image,
     description: currentUser.description,
-    discord_username: currentUser.discord_link,
+    discord_link: currentUser.discord_link,
   });
 
   const onChange = (e) => {
     if (e.target.name === "profile_image") {
       setPreviewImage(e.target.value);
     }
-    // console.log(e.target.value);
+    console.log(e.target.value);
     setPreviewImage(e.target.value);
     setFormData({ ...formData, [e.target.name]: e.target.value });
     setButtonActive(true);
@@ -139,12 +143,12 @@ const UserPage = () => {
       username: currentUser.username,
       profile_image: currentUser.profile_image,
       description: currentUser.description,
-      discord_username: currentUser.discord_username,
+      discord_link: currentUser.discord_link,
     });
   }, [currentUser]);
 
   const handleEdit = () => {
-    setCurrentUser(currentUser);
+    setCurrentUser(user);
     setIsEditing(true);
   };
 
@@ -159,14 +163,16 @@ const UserPage = () => {
       const res1 = await axios.put(`${DEV_API_AUTH}/user/`, formData);
       console.log(res1);
       setIsEditing(false);
-      // window.location.reload();
+      window.location.reload();
       const res2 = await axios.get(`${DEV_API_AUTH}/user/`);
-      setCurrentUser(res2.data);
+      setCurrentUser(res1);
     } catch (err) {
-      // console.log(err.response.data.error);
+      console.log(err.response.data.error);
       setErrorUser(err.response.data.error);
+      setShowAlert(true);
       setTimeout(() => {
-        setErrorUser("");
+        // setErrorUser("");
+        setShowAlert(false);
       }, 3000);
     }
   };
@@ -184,17 +190,36 @@ const UserPage = () => {
       const res2 = await axios.get(`${DEV_API_AUTH}/user`);
       setUser(res2.data);
     } catch (err) {
-      // console.log(err);
+      console.log(err);
     }
   };
 
   return (
     <div className="userpage">
       <div className="usercontainer">
-        <h1 className="userpagetitle">
-          Edit your user details. Create or delete a group and check out groups
-          you have joined.
-        </h1>
+        <div className="popupuser">
+          <OverlayTrigger
+            trigger="click"
+            placement="top"
+            overlay={
+              <Popover>
+                <Popover.Header as="h3">Popover title</Popover.Header>
+                <Popover.Body>
+                  Edit your profile details. Create or delete a group and check
+                  out groups you have joined.
+                </Popover.Body>
+              </Popover>
+            }
+          >
+            <button type="button" class="btn btn-secondary">
+              Click here!
+            </button>
+          </OverlayTrigger>
+        </div>{" "}
+        {/* <h1 className="userpagetitle">
+          // Edit your user details. Create or delete a group and check out
+          groups // you have joined. //{" "}
+        </h1> */}
         <div className="profile-details">
           <strong>Username:</strong>{" "}
           {isEditing ? (
@@ -209,10 +234,9 @@ const UserPage = () => {
           ) : (
             user.username
           )}
-          <h5 className="error-user">{errorUser}</h5>
         </div>
         <div className=" profile-details ">
-          <strong>Image:</strong>{" "}
+          <strong>Profile image:</strong>{" "}
           {isEditing ? (
             <>
               <input
@@ -248,18 +272,17 @@ const UserPage = () => {
             )}
           </div>
           <div className="profile-details ">
-            <strong>Discord Username:</strong>{" "}
+            <strong>Discord Link:</strong>{" "}
             {isEditing ? (
               <input
-                name="discord_username"
+                name="discord_link"
                 className="input-group-text"
                 id="addon-wrapping"
-                value={formData.discord_username}
-                onChange={onChange}
+                value={formData.discord_link}
                 onKeyDown={handleKeyDown}
               />
             ) : (
-              user.discord_username
+              user.discord_link
             )}
           </div>
         </li>
@@ -289,7 +312,7 @@ const UserPage = () => {
                   <Dropdown.Toggle variant="secondary" id="dropdown-games">
                     {toggleText}
                   </Dropdown.Toggle>
-                  <Dropdown.Menu>
+                  <Dropdown.Menu className="gameselectbutton">
                     <div className="scrollable-menu">
                       {games &&
                         games.map((game) => (
@@ -325,15 +348,38 @@ const UserPage = () => {
                     required
                   />
                 </div>
-                <div className="form-group">
-                  <Button className="listBtn" variant="light" type="submit">
-                    Create a group
-                  </Button>
-                  <h5 className="error-create">{errorGroup}</h5>
-                </div>
+                <Button className="listBtn" variant="light" type="submit">
+                  <p>Create a group</p>
+                </Button>
               </form>
             </Card.Body>
           </Card>
+        )}
+        {errorGroup && (
+          <Modal show={showAlert} onHide={() => setShowAlert(false)}>
+            <Modal.Header closeButton>
+              <Modal.Title>Error</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>{errorGroup}</Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={() => setShowAlert(false)}>
+                Close
+              </Button>
+            </Modal.Footer>
+          </Modal>
+        )}
+        {errorUser && (
+          <Modal show={showAlert} onHide={() => setShowAlert(false)}>
+            <Modal.Header closeButton>
+              <Modal.Title>Error</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>{errorUser}</Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={() => setShowAlert(false)}>
+                Close
+              </Button>
+            </Modal.Footer>
+          </Modal>
         )}
       </div>
       <div className="groups-container">
@@ -363,7 +409,6 @@ const UserPage = () => {
                 <li>
                   <span>Game:</span> {group.game}
                 </li>
-
                 <li>
                   <span>Group title:</span>{" "}
                   <Link className="group-link" to={`/groups/${group.id}`}>
@@ -373,6 +418,12 @@ const UserPage = () => {
                 <li>
                   <span className="descriptionText">Description:</span>{" "}
                   {group.description}
+                </li>
+                <li className="likescolor">
+                  <span>Likes:</span> {group.likes}
+                </li>
+                <li className="dislikescolor">
+                  <span>Dislikes:</span> {group.dislikes}
                 </li>
               </ul>
               <div className="group-delete">

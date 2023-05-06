@@ -7,6 +7,8 @@ import Button from "react-bootstrap/Button";
 import { useLocation } from "react-router-dom";
 import { DEV_API_AUTH } from "../consts-data";
 import Form from "react-bootstrap/Form";
+import { Modal } from "react-bootstrap";
+import { OverlayTrigger, Popover } from "react-bootstrap";
 
 const GroupPage = () => {
   const location = useLocation();
@@ -97,16 +99,9 @@ const GroupPage = () => {
       const res = await axios.delete(
         `${DEV_API_GROUPSURL}/${groupId}/${memberId}/remove/`
       );
-      console.log(res);
-      setGroup((group) => {
-        const updatedMembers = group.members.filter(
-          (member) => member.id !== memberId
-        );
-        return {
-          ...group,
-          members: updatedMembers,
-        };
-      });
+
+      const res1 = await axios.get(`${DEV_API_GROUPSURL}/${groupId}/`);
+      setGroup(res1.data);
     } catch (err) {
       console.log(err);
     }
@@ -126,13 +121,14 @@ const GroupPage = () => {
   const handleEditClick = () => {
     setEditingField(true);
   };
-
+  const [showAlert, setShowAlert] = useState(false);
   const handleSaveClick = async () => {
     try {
       const res = await axios.put(`${DEV_API_GROUPSURL}/${groupId}/`, {
         name: groupData.name,
         description: groupData.description,
       });
+      // setGroup(res.data);
       setGroupData({ name: res.data.name, description: res.data.description });
       setOriginalGroupData({
         name: res.data.name,
@@ -140,14 +136,16 @@ const GroupPage = () => {
       });
       setEditable(false);
       setEditingField(null);
-      const res1 = await axios.get(`${DEV_API_GROUPSURL}/${groupId}/`);
-      setGroup(res1.data);
-      setGroup;
+      // window.location.reload();
+      // const res1 = await axios.get(`${DEV_API_GROUPSURL}/${groupId}/`);
+      // // setGroup(re1.data);
+      // setGroup;
     } catch (err) {
-      setError(err.response.data.error);
+      setShowAlert(true);
+
       console.log(err.response.data.error);
       setTimeout(() => {
-        setError("");
+        setShowAlert(false);
       }, 3000);
     }
   };
@@ -221,7 +219,7 @@ const GroupPage = () => {
       console.log(res);
       const res2 = await axios.get(`${DEV_API_GROUPSURL}/${groupId}`);
       setGroup(res2.data);
-      setClicked({ liked: true, disliked: true });
+      setClicked({ liked: true });
     } catch (err) {
       console.log(err);
     }
@@ -233,7 +231,7 @@ const GroupPage = () => {
       console.log(res);
       const res2 = await axios.get(`${DEV_API_GROUPSURL}/${groupId}`);
       setGroup(res2.data);
-      setClicked({ liked: true, disliked: true });
+      setClicked({ disliked: true });
     } catch (err) {
       console.log(err);
     }
@@ -244,18 +242,46 @@ const GroupPage = () => {
       <ul className="groupscard" key="title">
         <div className="cardetails">
           <div className="cardetails-body">
-            {!isOwner ? (
-              <h1 className="usertitle">
-                Log in and join a group. Chat with your fellow members and leave
-                a rating! Create or edit your own group by going to your user
-                page.
-              </h1>
-            ) : (
-              <h1 className="ownertitle">
-                Edit your group details. Remove members by opening the dropdown
-                menu
-              </h1>
-            )}
+            <div className="popups">
+              {!isOwner ? (
+                <OverlayTrigger
+                  trigger="click"
+                  placement="top"
+                  overlay={
+                    <Popover>
+                      <Popover.Header as="h3">Popover title</Popover.Header>
+                      <Popover.Body>
+                        Log in and join a group. Chat with your fellow members
+                        and leave a rating! Create or edit your own group by
+                        going to your profile page.
+                      </Popover.Body>
+                    </Popover>
+                  }
+                >
+                  <button type="button" class="btn btn-secondary">
+                    Click here!
+                  </button>
+                </OverlayTrigger>
+              ) : (
+                <OverlayTrigger
+                  trigger="click"
+                  placement="top"
+                  overlay={
+                    <Popover>
+                      <Popover.Header as="h3">Popover title</Popover.Header>
+                      <Popover.Body>
+                        Edit your group details. Remove members by opening the
+                        dropdown menu
+                      </Popover.Body>
+                    </Popover>
+                  }
+                >
+                  <button type="button" class="btn btn-secondary">
+                    Click here!
+                  </button>
+                </OverlayTrigger>
+              )}
+            </div>
             {editable && editingField === "name" && isOwner ? (
               <div className="group-info-section">
                 <span className="nametext">Group name:</span>
@@ -283,7 +309,22 @@ const GroupPage = () => {
                 )}
               </div>
             )}
-            <h5 className="error">{error}</h5>
+            {error && (
+              <Modal show={showAlert} onHide={() => setShowAlert(false)}>
+                <Modal.Header closeButton>
+                  <Modal.Title>Error</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>{error}</Modal.Body>
+                <Modal.Footer>
+                  <Button
+                    variant="secondary"
+                    onClick={() => setShowAlert(false)}
+                  >
+                    Close
+                  </Button>
+                </Modal.Footer>
+              </Modal>
+            )}
             <div className="descriptiontext">
               {editable && editingField === "description" && isOwner ? (
                 <div className="group-info-section">
@@ -404,21 +445,25 @@ const GroupPage = () => {
                                   alt={member.username}
                                 />
                               ) : (
-                                <span
-                                  style={{
-                                    visibility: "hidden",
-                                  }}
-                                ></span>
+                                <span style={{ visibility: "hidden" }}></span>
                               )}
                               {member.username}
                             </Link>
                           ) : (
                             <div>
-                              <img src={member.profile_image} />
+                              {member.profile_image ? (
+                                <img
+                                  src={member.profile_image}
+                                  alt={member.username}
+                                />
+                              ) : (
+                                <span style={{ visibility: "hidden" }}></span>
+                              )}
                               {member.username}
                             </div>
                           )}
                         </span>
+
                         {group.owner &&
                           group.owner.username === user.username && (
                             <button
@@ -438,13 +483,18 @@ const GroupPage = () => {
             </div>
             <div className="chatbox" ref={chatBoxRef}>
               {group.groupchat_messages &&
+              group.groupchat_messages.length === 0 ? (
+                <h2 className="chatempty">No messages have been added yet</h2>
+              ) : (
+                group.groupchat_messages &&
                 group.groupchat_messages.map((message, ind) => (
                   <div className="chat-message" key={ind}>
                     <p className="timestamp">{message.created_at}</p>
                     <h6 className="messageuser">{message.created_by}</h6>
                     <p>{message.message_text}</p>
                   </div>
-                ))}
+                ))
+              )}
             </div>
             <div className="inputmessage">
               {loggedIn &&

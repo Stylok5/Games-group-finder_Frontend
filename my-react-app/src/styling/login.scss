@@ -1,26 +1,29 @@
 .form-body-login form {
   position: relative;
-  top: 2rem;
+  top: 3rem;
 }
 
 .main-form-login {
   display: flex;
+  // background-position: center;
   background-image: linear-gradient(
       0deg,
       rgb(156, 152, 152),
-      rgba(156, 151, 151, 0.4)
+      rgba(156, 151, 151, 0.2)
     ),
     url("https://cdn.wallpapersafari.com/74/55/8RDqlF.jpg");
   justify-content: center;
   align-items: center;
+  // background-position: center;
   min-height: calc(100vh - 12vh);
-  width: 100vw;
 }
-
+// https://cdn.wallpapersafari.com/74/55/8RDqlF.jpg
 .form-body-login {
-  height: 70vh;
-  width: 25vw;
+  height: 85vh;
+  width: 35vw;
   top: 2vh;
+  margin-bottom: 8em;
+  margin-top: 6em;
   position: relative;
   background-image: linear-gradient(
       0deg,
@@ -32,43 +35,94 @@
   border-radius: 10px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
-
+// https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/d785543a-4d1a-4c2c-9023-ecbf90a7dd5f/dbe767e-75487324-b348-4d19-aea7-efaefa044619.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2Q3ODU1NDNhLTRkMWEtNGMyYy05MDIzLWVjYmY5MGE3ZGQ1ZlwvZGJlNzY3ZS03NTQ4NzMyNC1iMzQ4LTRkMTktYWVhNy1lZmFlZmEwNDQ2MTkucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.dIivHwqHzAMAnhb0qFo08X054O-_iIU9U4WRBgcmSxY
 .main-form-login {
   margin-top: 4vh;
-  display: flex;
-  background-color: black;
-  justify-content: center;
   min-height: calc(100vh - 12vh);
   width: 100vw;
 
   input {
     font-size: 15px;
+    width: 28vw;
+    text-align: center;
   }
 }
 
 @media only screen and (max-width: 768px) {
   .form-body-login {
-    width: 35vw;
-    padding-bottom: 18em;
-    margin-bottom: 5em;
-    margin-top: 5em;
+    width: 20em;
+    padding-bottom: 27em;
+  }
+  .logintitle {
+    top: 2em !important;
+  }
+  .loginbtn button {
+    font-size: 12px !important;
+    width: 8em !important;
+    top: 3em !important;
+    left: 7em !important;
+    height: 3.5em !important;
+  }
+  .text-muted {
+    margin-top: 4em;
+  }
+  .error-login {
+    margin-top: -4rem !important;
+    font-size: 14px !important;
   }
   .form-body-login h2 {
     font-size: 25px;
   }
+  .main-form-login input {
+    text-align: center;
+    left: 1em;
+    width: 15em;
+  }
+
   .logintitle {
-    font-size: 20px !important;
+    font-size: 23px !important;
+    margin-bottom: 1em;
   }
   .mt-3 {
-    font-size: 9px;
-    top: 3rem !important;
+    font-size: 15px !important;
+    top: 1rem !important;
+  }
+}
+@media only screen and (min-width: 1800px) {
+  .mt-3 {
+    top: 8em !important;
+  }
+  .buttonlink {
+    position: relative;
+    bottom: 3em;
+  }
+  .inputs {
+    position: relative;
+    bottom: 3em;
+  }
+  .form-body-login {
+    height: 62em;
+    width: 50em;
+  }
+  .main-form-login input {
+    font-size: 16px;
+    width: 540px !important;
+  }
+  .loginbtn button {
+    width: 14em !important;
+    top: 7em !important;
+    left: 10em !important;
+  }
+  .insidecard {
+    margin-top: 3.4em;
   }
 }
 .mt-3 {
   text-align: center;
   position: relative;
   margin-bottom: auto;
-  top: 7rem;
+  font-size: 20px;
+  top: 6rem;
 }
 .text-muted a {
   text-decoration: none;
@@ -78,65 +132,53 @@
   text-decoration: underline;
 }
 .text-muted a:active {
-  color: #007bff;
+  transform: scale(0.9);
 }
 
 .logintitle {
   text-align: center;
   position: relative;
   font-size: 40px;
-  top: 4rem;
+  top: 2rem;
+  text-transform: uppercase;
+  border-bottom: 2px solid #0d0d0d;
 }
 
 .loginbtn button {
-  width: 75%;
   height: 50px;
   position: relative;
   top: 10vh;
-  left: 3vw;
+  width: 12vw;
+  text-transform: uppercase;
   border-radius: 5px;
-  font-size: 20px;
+  left: 8vw;
+  font-size: 16px;
 }
 .loginbtn button:active {
   transform: scale(0.9);
 }
 
-@media only screen and (max-width: 768px) {
-  .loginbtn button {
-    font-size: 17px;
-  }
-  .error-login {
-    margin-top: -4rem !important;
-    font-size: 14px !important;
-  }
+.loginbtn button:hover {
+  background-color: #063a88;
 }
 
-.error-login {
-  color: red;
+.insidecard {
   position: relative;
-  text-align: center;
-  top: 10rem;
-  font-weight: bold;
-  font-size: 20px;
-  animation-name: shake;
-  animation-duration: 0.5s;
-  animation-iteration-count: 3;
+  top: 2em;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
 }
 
-@keyframes shake {
-  0% {
-    transform: translateX(0);
-  }
-  25% {
-    transform: translateX(10px);
-  }
-  50% {
-    transform: translateX(0);
-  }
-  75% {
-    transform: translateX(-10px);
-  }
-  100% {
-    transform: translateX(0);
-  }
+.buttonlink {
+  display: flex;
+  height: 2px !important;
+  position: relative;
+  align-items: center;
+  flex-direction: column;
+}
+
+.inputs {
+  position: relative;
+  bottom: 20px;
 }

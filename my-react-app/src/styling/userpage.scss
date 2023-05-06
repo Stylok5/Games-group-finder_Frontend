@@ -53,15 +53,20 @@
   max-width: 25%;
   position: relative;
   margin-left: 3em;
-  bottom: 11px;
+  bottom: 14px;
   border-radius: 50%;
 }
 @media (min-width: 1800px) {
   .normal-img {
-    max-width: 25%;
+    bottom: 8px;
   }
+
   .profile-details {
     height: 17vh;
+  }
+
+  .list-form .listBtn {
+    top: 5em;
   }
 }
 
@@ -122,23 +127,25 @@
   transform: scale(0.9);
 }
 .creategroupcontainer {
+  display: flex;
+  justify-content: end;
   position: relative;
-  bottom: 60vh;
-  left: 63vw;
 }
+
 .creategroupcontainer .card {
   border: 1px solid #ccc;
   border-radius: 5px;
   width: 34vw;
-  top: 1em;
-  position: relative;
+  position: absolute;
+  bottom: 2.4em;
+  margin-right: 3em;
   background-color: rgb(255, 255, 255);
   height: 48vh;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
 .dropdown-menu {
-  max-height: 120px;
+  max-height: 140px;
   overflow-y: scroll;
 }
 
@@ -146,7 +153,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 2rem;
+  margin: 3.3rem;
 }
 
 .list-form input {
@@ -159,11 +166,9 @@
 
 .groups-container {
   display: flex;
+  margin-top: 22vh;
   flex-wrap: wrap;
   overflow-wrap: break-word;
-  position: relative;
-  bottom: 22vh;
-  left: 2px;
 }
 
 .group-box {
@@ -171,9 +176,9 @@
   flex-wrap: wrap;
   justify-content: space-between;
   flex: 1 0 32%; /* Optional: This sets the width of each item */
-  margin: 1em;
   padding: 1rem;
   width: 30vw;
+  margin: 1em 4em 3em 1em;
   background-color: rgb(254, 254, 254);
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -195,7 +200,7 @@
   transition: all 0.2s ease-in-out;
 }
 .group-box:active {
-  box-shadow: 0 0 10px #000;
+  transform: scale(0.97);
 }
 .userpage a {
   text-decoration: none;
@@ -222,33 +227,66 @@
   color: black;
   text-decoration: none;
 }
+.dropdown button:active {
+  background-color: #a5a5a7 !important;
+}
+.btn-secondary {
+  box-shadow: 0 0 10px #000;
+}
+.gameselectbutton {
+  width: 13em !important;
+}
+.listBtn {
+  margin-top: 4em;
+}
+.list-form button {
+  position: relative;
+  top: 2vh;
+}
 
 @media (max-width: 768px) {
   .group-delete {
     position: relative;
     right: 2.5px;
   }
+  .dropdown button {
+    width: 11em;
+    font-size: 10px !important;
+  }
+  .list-form button p {
+    font-size: 8px;
+  }
+  .list-form .listBtn {
+    padding-bottom: 0px;
+    width: 6em;
+    height: 25px;
+    top: -10px;
+  }
   .userpage {
     font-size: 12px;
   }
-
+  .popupuser .btn-secondary {
+    width: 10em !important;
+    font-size: 17px;
+    top: 0.5em;
+  }
   .form-group button {
     top: 5.5em;
   }
   .creategroupcontainer .card {
-    padding-bottom: 24em;
-    top: 5em;
-    right: 8px;
-  }
-
-  .userpage button {
-    width: 11em;
-    font-size: 10px !important;
+    bottom: 50px;
   }
 
   .form-group input {
     width: 11.5em;
+
+    height: 2em;
     font-size: 9px;
+  }
+  .dropdown-menu {
+    max-height: 80px;
+    width: 10px !important;
+    font-size: 10px !important;
   }
   .normal-img {
     top: 0;
@@ -271,33 +309,35 @@
     font-size: 9px;
   }
 }
-
 .userpage span {
   font-weight: bold;
 }
-
-.error-create {
-  position: absolute;
-  color: red;
-  text-align: center;
-  bottom: 7vh;
-  right: 5vw;
-  font-weight: bold;
-  font-size: 18px;
-  animation-name: shake;
-  animation-duration: 0.3s;
-  animation-iteration-count: 3;
-}
-.error-user {
-  color: red;
-  font-weight: bold;
-  text-align: center;
-  margin-top: 10px;
-  font-size: 18px;
-  animation-name: shake;
-  animation-duration: 0.3s;
-  animation-iteration-count: 3;
-}
+// .gameselectbutton {
+//   width: 2px !important;
+//   height: 5em !important;
+// }
+// .error-create {
+//   position: absolute;
+//   color: red;
+//   text-align: center;
+//   bottom: 7vh;
+//   right: 5vw;
+//   font-weight: bold;
+//   font-size: 18px;
+//   animation-name: shake;
+//   animation-duration: 0.3s;
+//   animation-iteration-count: 3;
+// }
+// .error-user {
+//   color: red;
+//   font-weight: bold;
+//   text-align: center;
+//   margin-top: 10px;
+//   font-size: 18px;
+//   animation-name: shake;
+//   animation-duration: 0.3s;
+//   animation-iteration-count: 3;
+// }
 
 @keyframes shake {
   0% {
@@ -317,13 +357,37 @@
   }
 }
 
-.userpagetitle {
-  text-align: center;
+// .userpagetitle {
+//   text-align: center;
+//   position: relative;
+//   font-weight: bold;
+//   bottom: 2em;
+//   border-bottom: 2px solid rgb(8, 8, 8);
+//   font-size: 1.3em;
+//   color: #070707; /* Change color as desired */
+//   text-transform: uppercase;
+// }
+
+.likescolor {
+  color: green !important;
+}
+
+.dislikescolor {
+  color: rgb(175, 5, 5) !important;
+}
+
+.popupuser {
+  display: flex;
+  justify-content: center;
+}
+
+.popupuser .btn-secondary {
+  width: 20em;
   position: relative;
-  font-weight: bold;
-  bottom: 2em;
-  border-bottom: 2px solid rgb(8, 8, 8);
-  font-size: 1.3em;
-  color: #070707; /* Change color as desired */
-  text-transform: uppercase;
+  margin-bottom: 20px;
+  bottom: 30px;
+}
+
+.popupuser .btn-secondary:active {
+  transform: scale(0.9);
 }

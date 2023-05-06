@@ -51,7 +51,10 @@ const GamePage = () => {
           </ul>
           <h2 className="groupstitle">Groups</h2>
           <div className="gamepagetext">
-            {game.groups &&
+            {game.groups && game.groups.length === 0 ? (
+              <h2 className="nogroups"> No groups have been created yet</h2>
+            ) : (
+              game.groups &&
               game.groups.map((item, ind) => (
                 <Link to={`/groups/${item.id}`}>
                   <ul key={ind}>
@@ -60,7 +63,8 @@ const GamePage = () => {
                     <p className="dislikestext">Dislikes: {item.dislikes}</p>
                   </ul>
                 </Link>
-              ))}
+              ))
+            )}
           </div>
         </div>
       </div>
