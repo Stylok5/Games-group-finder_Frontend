@@ -100,8 +100,11 @@
   text-decoration: none;
   color: black;
 }
-
-.games-grid .game-card .officialLink {
+.officialLink {
+  background-color: white;
+  border: none;
+}
+.officialLink {
   color: #000;
   font-size: 21px;
   text-decoration: none;
@@ -110,7 +113,7 @@
   transition: all 0.3s ease;
 }
 
-.games-grid .game-card .officialLink::before {
+.officialLink::before {
   content: "";
   position: absolute;
   left: 0;
@@ -123,12 +126,18 @@
   transition: all 0.3s ease;
 }
 
-.games-grid .game-card .officialLink:hover::before {
+.officialLink:hover::before {
   transform: scaleX(1);
   transform-origin: left;
 }
 
-.games-grid .game-card .officialLink:active {
-  transform: translateY(2px);
-  color: #ff4500;
+.officialLink:active {
+  transform: scale(1.2);
+  color: #ff4500 !important;
+}
+
+.spinner-border {
+  position: absolute;
+  top: 40vh !important;
+  left: 50vw !important;
 }

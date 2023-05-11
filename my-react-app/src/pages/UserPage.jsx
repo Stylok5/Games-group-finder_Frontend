@@ -13,8 +13,8 @@ const UserPage = () => {
   const [currentUser, setCurrentUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
   const { userId } = useParams();
-  const [errorUser, setErrorUser] = useState("");
-  const [errorGroup, setErrorGroup] = useState("");
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setLoggedIn(localStorage.getItem("token") ? true : false);
@@ -23,17 +23,18 @@ const UserPage = () => {
     )
       ? `Bearer ${localStorage.getItem("token")}`
       : "";
-    console.log(localStorage);
+    // console.log(localStorage);
   }, [location]);
 
   useEffect(() => {
     const getCurrentUser = async () => {
       try {
         const res = await axios.get(`${DEV_API_AUTH}/user/`);
-        console.log(res);
+        setIsLoading(false);
+        // console.log(res);
         setCurrentUser(res.data);
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     };
     getCurrentUser();
@@ -44,7 +45,8 @@ const UserPage = () => {
       try {
         const res = await axios.get(`${DEV_API_AUTH}/users/${userId}`);
         setUser(res.data);
-        console.log(res);
+        setIsLoading(false);
+        // console.log(res);
       } catch (err) {
         console.log(err);
       }
@@ -58,8 +60,8 @@ const UserPage = () => {
     description: "",
   });
 
-  console.log(user);
-  console.log(currentUser);
+  // console.log(user);
+  // console.log(currentUser);
 
   const [games, setGames] = useState([]);
   useEffect(() => {
@@ -67,7 +69,7 @@ const UserPage = () => {
       try {
         const res = await axios.get(`${DEV_API_URL}`);
         setGames(res.data);
-        console.log(res.data);
+        // console.log(res.data);
       } catch (err) {
         console.log(err);
       }
@@ -82,17 +84,17 @@ const UserPage = () => {
       ...group,
       [e.target.name]: e.target.value,
     });
-    console.log(group);
+    // console.log(group);
   };
   const [showAlert, setShowAlert] = useState(false);
   const createGroup = async (e) => {
     e.preventDefault();
     try {
-      console.log("Group Name:", group.name);
-      console.log("Game Title:", group.title);
-      console.log("Group Description:", group.description);
+      // console.log("Group Name:", group.name);
+      // console.log("Game Title:", group.title);
+      // console.log("Group Description:", group.description);
       const res = await axios.post(`${DEV_API_GROUPSURL}/`, group);
-      console.log(res);
+      // console.log(res);
       setGroup({
         game: "",
         name: "",
@@ -101,10 +103,10 @@ const UserPage = () => {
       setToggleText("Select a game");
       const res1 = await axios.get(`${DEV_API_AUTH}/user`);
       setUser(res1.data);
-      console.log(res1.data);
+      // console.log(res1.data);
     } catch (err) {
       console.log(err.response.data.error);
-      setErrorGroup(err.response.data.error);
+      setError(err.response.data.error);
       setShowAlert(true);
       setTimeout(() => {
         // setErrorGroup("");
@@ -125,14 +127,14 @@ const UserPage = () => {
     username: currentUser.username,
     profile_image: currentUser.profile_image,
     description: currentUser.description,
-    discord_link: currentUser.discord_link,
+    discord_username: currentUser.discord_username,
   });
 
   const onChange = (e) => {
     if (e.target.name === "profile_image") {
       setPreviewImage(e.target.value);
     }
-    console.log(e.target.value);
+    // console.log(e.target.value);
     setPreviewImage(e.target.value);
     setFormData({ ...formData, [e.target.name]: e.target.value });
     setButtonActive(true);
@@ -143,12 +145,12 @@ const UserPage = () => {
       username: currentUser.username,
       profile_image: currentUser.profile_image,
       description: currentUser.description,
-      discord_link: currentUser.discord_link,
+      discord_username: currentUser.discord_username,
     });
   }, [currentUser]);
 
   const handleEdit = () => {
-    setCurrentUser(user);
+    setCurrentUser(currentUser);
     setIsEditing(true);
   };
 
@@ -161,14 +163,14 @@ const UserPage = () => {
     e.preventDefault();
     try {
       const res1 = await axios.put(`${DEV_API_AUTH}/user/`, formData);
-      console.log(res1);
+      // console.log(res1);
       setIsEditing(false);
-      window.location.reload();
+      // window.location.reload();
       const res2 = await axios.get(`${DEV_API_AUTH}/user/`);
-      setCurrentUser(res1);
+      setCurrentUser(res2.data);
     } catch (err) {
       console.log(err.response.data.error);
-      setErrorUser(err.response.data.error);
+      setError(err.response.data.error);
       setShowAlert(true);
       setTimeout(() => {
         // setErrorUser("");
@@ -198,28 +200,30 @@ const UserPage = () => {
     <div className="userpage">
       <div className="usercontainer">
         <div className="popupuser">
-          <OverlayTrigger
-            trigger="click"
-            placement="top"
-            overlay={
-              <Popover>
-                <Popover.Header as="h3">Popover title</Popover.Header>
-                <Popover.Body>
-                  Edit your profile details. Create or delete a group and check
-                  out groups you have joined.
-                </Popover.Body>
-              </Popover>
-            }
-          >
-            <button type="button" class="btn btn-secondary">
-              Click here!
-            </button>
-          </OverlayTrigger>
-        </div>{" "}
-        {/* <h1 className="userpagetitle">
-          // Edit your user details. Create or delete a group and check out
-          groups // you have joined. //{" "}
-        </h1> */}
+          {isLoading ? (
+            <div className="spinner-border text-primary" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+          ) : (
+            <OverlayTrigger
+              trigger="click"
+              placement="top"
+              overlay={
+                <Popover>
+                  <Popover.Header as="h3">Popover title</Popover.Header>
+                  <Popover.Body>
+                    Edit your profile details. Create or delete a group. Click
+                    on the group cards to navigate to the group's page.
+                  </Popover.Body>
+                </Popover>
+              }
+            >
+              <button type="button" className="btn btn-secondary">
+                Click here!
+              </button>
+            </OverlayTrigger>
+          )}
+        </div>
         <div className="profile-details">
           <strong>Username:</strong>{" "}
           {isEditing ? (
@@ -272,17 +276,18 @@ const UserPage = () => {
             )}
           </div>
           <div className="profile-details ">
-            <strong>Discord Link:</strong>{" "}
+            <strong>Discord Username:</strong>{" "}
             {isEditing ? (
               <input
-                name="discord_link"
+                name="discord_username"
                 className="input-group-text"
                 id="addon-wrapping"
-                value={formData.discord_link}
+                value={formData.discord_username}
+                onChange={onChange}
                 onKeyDown={handleKeyDown}
               />
             ) : (
-              user.discord_link
+              user.discord_username
             )}
           </div>
         </li>
@@ -355,32 +360,17 @@ const UserPage = () => {
             </Card.Body>
           </Card>
         )}
-        {errorGroup && (
-          <Modal show={showAlert} onHide={() => setShowAlert(false)}>
-            <Modal.Header closeButton>
-              <Modal.Title>Error</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>{errorGroup}</Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={() => setShowAlert(false)}>
-                Close
-              </Button>
-            </Modal.Footer>
-          </Modal>
-        )}
-        {errorUser && (
-          <Modal show={showAlert} onHide={() => setShowAlert(false)}>
-            <Modal.Header closeButton>
-              <Modal.Title>Error</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>{errorUser}</Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={() => setShowAlert(false)}>
-                Close
-              </Button>
-            </Modal.Footer>
-          </Modal>
-        )}
+        <Modal show={showAlert} onHide={() => setShowAlert(false)}>
+          <Modal.Header closeButton>
+            <Modal.Title>Error</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>{error && <p>{error}</p>}</Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={() => setShowAlert(false)}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </div>
       <div className="groups-container">
         {user.groups &&
@@ -397,12 +387,18 @@ const UserPage = () => {
                   ) : (
                     <div>
                       <span>Created by </span>
-                      <Link
-                        className="owner-username"
-                        to={`/users/${group.owner.id}`}
-                      >
-                        {group.owner.username}
-                      </Link>
+                      <div>
+                        <button
+                          className="owner-username"
+                          onClick={(e) =>
+                            e.preventDefault()(
+                              (window.location.href = `/users/${group.owner.id}`)
+                            )
+                          }
+                        >
+                          {group.owner.username}
+                        </button>
+                      </div>
                     </div>
                   )}
                 </li>
@@ -410,10 +406,7 @@ const UserPage = () => {
                   <span>Game:</span> {group.game}
                 </li>
                 <li>
-                  <span>Group title:</span>{" "}
-                  <Link className="group-link" to={`/groups/${group.id}`}>
-                    {group.name}
-                  </Link>
+                  <span>Group title:</span> {group.name}
                 </li>
                 <li>
                   <span className="descriptionText">Description:</span>{" "}
@@ -428,15 +421,16 @@ const UserPage = () => {
               </ul>
               <div className="group-delete">
                 {group.owner.email === currentUser.email && (
-                  <Link
+                  <button
+                    className="delete-button"
                     onClick={(e) => {
+                      e.preventDefault();
                       e.stopPropagation();
                       removeGroup(group.id);
                     }}
-                    className="delete-button"
                   >
                     Delete group
-                  </Link>
+                  </button>
                 )}
               </div>
             </Link>

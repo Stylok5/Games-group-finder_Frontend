@@ -9,11 +9,13 @@ const Browse = () => {
   const [totalPages, setTotalPages] = useState(null);
   const PAGE_SIZE = 10;
   const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     const getGames = async (page) => {
       try {
-        const res = await axios.get(`${DEV_API_URL}/?page=${page}`);
+        const res = await axios.get(`${DEV_API_URL}?page=${page}`);
         setGames(res.data.results);
+        setIsLoading(false);
         setTotalPages(
           res.data.count ? Math.ceil(res.data.count / PAGE_SIZE) : null
         );
@@ -22,7 +24,7 @@ const Browse = () => {
         console.log(err);
       }
     };
-    
+
     getGames(currentPage);
 
     const handleGetGames = getGames;
@@ -35,8 +37,6 @@ const Browse = () => {
       const newPage = event.state?.page || 1;
       handleGetGames(newPage);
     }
-
-    window.addEventListener("popstate", handlePopstate);
   }, [currentPage]);
 
   const handlePageClick = (page) => {
@@ -69,28 +69,35 @@ const Browse = () => {
         )}
         <div className="games-container">
           <div className="games-grid">
-            {games &&
+            {isLoading ? (
+              <div className="spinner-border text-primary" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </div>
+            ) : (
+              games &&
               games.map((game, ind) => (
-                <Link className="game-link" to={`/games/${game.id}`}>
-                  <div key={ind} className="game-card">
+                <Link key={ind} className="game-link" to={`/games/${game.id}`}>
+                  <div className="game-card">
                     <img
                       className="game-image"
                       src={game.image}
                       alt={game.title}
                     />
                     <h5 className="game-title">{game.title}</h5>
-
-                    <a
+                    <button
                       className="officialLink"
-                      href={game.official_site}
-                      target="_blank"
-                      onClick={(e) => e.stopPropagation()}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        window.open(game.official_site, "_blank");
+                      }}
                     >
                       Official Site
-                    </a>
+                    </button>
                   </div>
                 </Link>
-              ))}
+              ))
+            )}
           </div>
         </div>
       </ul>

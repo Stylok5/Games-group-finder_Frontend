@@ -2,16 +2,6 @@
   min-height: calc(100vh - 12vh);
   margin-top: 5vh;
   background: linear-gradient(135deg, #414e6b, #606c88);
-  // background: linear-gradient(to bottom right, #4568dc, #b06ab3);
-  // background-position: center;
-  // background-size: cover;
-  // background-image: linear-gradient(
-  //     0deg,
-  //     rgba(0, 0, 0, 0.2),
-  //     rgba(0, 0, 0, 0.2)
-  //   ),
-  //   url("https://wallpaperaccess.com/full/974166.jpg");
-  // min-height: calc(100vh - 12vh);
 }
 
 .usercontainer {
@@ -97,8 +87,15 @@
 }
 .delete-button:hover {
   background-color: #fff;
+  color: #c8352b;
   border: 1px solid #91271f;
 }
+.delete-button:active {
+  transform: scale(1.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0);
+  color: #007bff !important;
+}
+
 .editButtons {
   li button {
     border: none;
@@ -153,12 +150,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 3.3rem;
+  margin: 2rem;
 }
 
 .list-form input {
   margin: 0.5rem;
-  width: 10vw;
+  width: 13vw;
+  height: 5vh;
   padding: 0.5rem;
   border-radius: 5px;
   border: 1px solid #ccc;
@@ -211,11 +209,18 @@
 .owner-username {
   color: #007bff !important;
   text-decoration: none;
+  background-color: white;
+  border: none;
 }
 
 .owner-username:hover {
   text-decoration: underline;
   color: #0266d1 !important;
+}
+
+.owner-username:active {
+  transform: scale(1.2);
+  color: #ff4500 !important;
 }
 
 .group-box ul li {
@@ -244,6 +249,12 @@
   top: 2vh;
 }
 
+@media (min-width: 1500px) {
+  .creategroupcontainer .card {
+    padding-bottom: 24em !important;
+  }
+}
+
 @media (max-width: 768px) {
   .group-delete {
     position: relative;
@@ -257,10 +268,9 @@
     font-size: 8px;
   }
   .list-form .listBtn {
-    padding-bottom: 0px;
     width: 6em;
     height: 25px;
-    top: -10px;
+    top: 0;
   }
   .userpage {
     font-size: 12px;
@@ -279,7 +289,6 @@
 
   .form-group input {
     width: 11.5em;
-
     height: 2em;
     font-size: 9px;
   }
@@ -312,32 +321,6 @@
 .userpage span {
   font-weight: bold;
 }
-// .gameselectbutton {
-//   width: 2px !important;
-//   height: 5em !important;
-// }
-// .error-create {
-//   position: absolute;
-//   color: red;
-//   text-align: center;
-//   bottom: 7vh;
-//   right: 5vw;
-//   font-weight: bold;
-//   font-size: 18px;
-//   animation-name: shake;
-//   animation-duration: 0.3s;
-//   animation-iteration-count: 3;
-// }
-// .error-user {
-//   color: red;
-//   font-weight: bold;
-//   text-align: center;
-//   margin-top: 10px;
-//   font-size: 18px;
-//   animation-name: shake;
-//   animation-duration: 0.3s;
-//   animation-iteration-count: 3;
-// }
 
 @keyframes shake {
   0% {
@@ -357,17 +340,6 @@
   }
 }
 
-// .userpagetitle {
-//   text-align: center;
-//   position: relative;
-//   font-weight: bold;
-//   bottom: 2em;
-//   border-bottom: 2px solid rgb(8, 8, 8);
-//   font-size: 1.3em;
-//   color: #070707; /* Change color as desired */
-//   text-transform: uppercase;
-// }
-
 .likescolor {
   color: green !important;
 }
@@ -385,7 +357,7 @@
   width: 20em;
   position: relative;
   margin-bottom: 20px;
-  bottom: 30px;
+  bottom: 20px;
 }
 
 .popupuser .btn-secondary:active {

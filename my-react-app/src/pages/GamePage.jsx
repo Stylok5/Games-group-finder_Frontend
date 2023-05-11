@@ -11,7 +11,7 @@ const GamePage = () => {
       try {
         const res = await axios.get(`${DEV_API_URL}/${gameId}`);
         setGame(res.data);
-        console.log(res.data);
+        // console.log(res.data);
       } catch (err) {
         console.log(err);
       }
@@ -50,14 +50,18 @@ const GamePage = () => {
             </li>
           </ul>
           <h2 className="groupstitle">Groups</h2>
+          <h4 className="subtitle">
+            Create a new group in your profile page by clicking on your username
+            located at the bottom or top of the page
+          </h4>
           <div className="gamepagetext">
             {game.groups && game.groups.length === 0 ? (
               <h2 className="nogroups"> No groups have been created yet</h2>
             ) : (
               game.groups &&
               game.groups.map((item, ind) => (
-                <Link to={`/groups/${item.id}`}>
-                  <ul key={ind}>
+                <Link key={ind} to={`/groups/${item.id}`}>
+                  <ul>
                     <h3 style={{ display: "inline" }}>{item.name}</h3>
                     <p className="likestext">Likes: {item.likes}</p>
                     <p className="dislikestext">Dislikes: {item.dislikes}</p>

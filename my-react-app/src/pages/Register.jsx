@@ -21,7 +21,7 @@ const Register = () => {
   const [buttonActive, setButtonActive] = useState(false);
 
   const onChange = (e) => {
-    console.log(e.target.value);
+    // console.log(e.target.value);
     setFormData({ ...formData, [e.target.name]: e.target.value });
     setButtonActive(true);
   };
@@ -41,7 +41,7 @@ const Register = () => {
       //   setShowAlert(true);
       // } else {
       const res = await axios.post(`${DEV_API_AUTH}/register/`, formData);
-      console.log(res);
+      // console.log(res);
       setFormData(formData);
       navigate("/login");
     } catch (err) {

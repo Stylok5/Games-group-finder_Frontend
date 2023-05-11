@@ -1,12 +1,7 @@
 .main-form-register {
   margin-top: 4vh;
   display: flex;
-  background-image: linear-gradient(
-      0deg,
-      rgb(156, 152, 152),
-      rgba(156, 151, 151, 0.4)
-    ),
-    url("https://cdn.wallpapersafari.com/74/55/8RDqlF.jpg");
+  background: linear-gradient(0deg, rgb(150, 149, 149), rgba(16, 15, 15, 0.9));
   justify-content: center;
   align-items: center;
   min-height: calc(100vh - 12vh);
@@ -38,6 +33,7 @@
   input {
     font-size: 15px;
     width: 28vw;
+    height: 5vh;
     text-align: center;
   }
 }
@@ -89,7 +85,12 @@
     }
     input {
       top: 4.5em;
+      height: 2.2em;
       font-size: 13px;
+    }
+
+    .registerinside {
+      margin-bottom: 7.3em;
     }
   }
 }
@@ -110,17 +111,17 @@
 }
 
 .registerinside {
-  position: relative;
-  bottom: 4.5em;
+  margin-bottom: 8.5em;
 }
 
 @media only screen and (min-width: 1800px) {
   .registerinside {
-    bottom: 13em;
+    margin-bottom: 15em;
   }
   .form-body-register input {
-    width: 20vw;
+    width: 24vw;
   }
+
   .registerbtn button {
     width: 17rem;
   }

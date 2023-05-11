@@ -1,3 +1,4 @@
-export const DEV_API_URL = "http://localhost:8000/api/games";
-export const DEV_API_GROUPSURL = "http://localhost:8000/api/groups";
-export const DEV_API_AUTH = "http://localhost:8000/api/auth";
+export const DEV_API_URL = "https://games-group-finder.herokuapp.com/api/games";
+export const DEV_API_GROUPSURL =
+  "https://games-group-finder.herokuapp.com/api/groups";
+export const DEV_API_AUTH = "https://games-group-finder.herokuapp.com/api/auth";

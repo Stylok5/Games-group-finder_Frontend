@@ -9,12 +9,14 @@ import { DEV_API_AUTH } from "../consts-data";
 import Form from "react-bootstrap/Form";
 import { Modal } from "react-bootstrap";
 import { OverlayTrigger, Popover } from "react-bootstrap";
+
 const GroupPage = () => {
   const location = useLocation();
   const { groupId } = useParams();
   const [loggedIn, setLoggedIn] = useState(false);
   const [group, setGroup] = useState({});
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     setLoggedIn(localStorage.getItem("token") ? true : false);
     axios.defaults.headers.common["Authorization"] = localStorage.getItem(
@@ -22,7 +24,7 @@ const GroupPage = () => {
     )
       ? `Bearer ${localStorage.getItem("token")}`
       : "";
-    console.log(localStorage);
+    // console.log(localStorage);
   }, [location]);
 
   const [user, setUser] = useState({});
@@ -31,7 +33,7 @@ const GroupPage = () => {
       try {
         const res = await axios.get(`${DEV_API_AUTH}/user`);
         setUser(res.data);
-        console.log(res);
+        // console.log(res);
       } catch (err) {
         console.log(err);
       }
@@ -43,8 +45,9 @@ const GroupPage = () => {
     const getGroup = async () => {
       try {
         const res = await axios.get(`${DEV_API_GROUPSURL}/${groupId}`);
+        setIsLoading(false);
         setGroup(res.data);
-        console.log(res);
+        // console.log(res);
       } catch (err) {
         console.log(err);
       }
@@ -55,11 +58,11 @@ const GroupPage = () => {
   const joinGroup = async (groupid) => {
     try {
       const res1 = await axios.post(`${DEV_API_GROUPSURL}/${groupid}/join/`);
-      console.log(res1.data);
+      // console.log(res1.data);
       const res2 = await axios.get(`${DEV_API_GROUPSURL}/${groupid}`);
       setGroup(res2.data);
-      console.log(res2.data);
-      console.log(group);
+      // console.log(res2.data);
+      // console.log(group);
     } catch (err) {
       console.log(err);
     }
@@ -68,7 +71,7 @@ const GroupPage = () => {
   const [chat, SetChat] = useState("");
   const onChangeHandler = (e) => {
     SetChat(e.target.value);
-    console.log(e.target.value);
+    // console.log(e.target.value);
   };
 
   const chatBoxRef = useRef(null);
@@ -87,7 +90,7 @@ const GroupPage = () => {
       SetChat("");
       const res2 = await axios.get(`${DEV_API_GROUPSURL}/${groupid}`);
       setGroup(res2.data);
-      console.log(chat);
+      // console.log(chat);
     } catch (err) {
       console.log(err);
     }
@@ -135,14 +138,10 @@ const GroupPage = () => {
       });
       setEditable(false);
       setEditingField(null);
-      // window.location.reload();
-      // const res1 = await axios.get(`${DEV_API_GROUPSURL}/${groupId}/`);
-      // // setGroup(re1.data);
-      // setGroup;
     } catch (err) {
+      setError(err.response.data.error.name[0]);
       setShowAlert(true);
-      setError(err.response.data.error);
-      console.log(err.response.data.error);
+      console.log(err.response.data.error.name[0]);
       setTimeout(() => {
         setShowAlert(false);
       }, 3000);
@@ -215,7 +214,7 @@ const GroupPage = () => {
   const addLike = async (groupId) => {
     try {
       const res = await axios.post(`${DEV_API_GROUPSURL}/${groupId}/like/`);
-      console.log(res);
+      // console.log(res);
       const res2 = await axios.get(`${DEV_API_GROUPSURL}/${groupId}`);
       setGroup(res2.data);
       setClicked({ liked: true });
@@ -227,7 +226,7 @@ const GroupPage = () => {
   const addDislike = async (groupId) => {
     try {
       const res = await axios.post(`${DEV_API_GROUPSURL}/${groupId}/dislike/`);
-      console.log(res);
+      // console.log(res);
       const res2 = await axios.get(`${DEV_API_GROUPSURL}/${groupId}`);
       setGroup(res2.data);
       setClicked({ disliked: true });
@@ -250,14 +249,13 @@ const GroupPage = () => {
                     <Popover>
                       <Popover.Header as="h3">Popover title</Popover.Header>
                       <Popover.Body>
-                        Log in and join a group. Chat with your fellow members
-                        and leave a rating! Create or edit your own group by
-                        going to your profile page.
+                        Log in to join the group and chat with your fellow
+                        members. Don't forget to leave a rating!
                       </Popover.Body>
                     </Popover>
                   }
                 >
-                  <button type="button" class="btn btn-secondary">
+                  <button type="button" className="btn btn-secondary">
                     Click here!
                   </button>
                 </OverlayTrigger>
@@ -275,7 +273,7 @@ const GroupPage = () => {
                     </Popover>
                   }
                 >
-                  <button type="button" class="btn btn-secondary">
+                  <button type="button" className="btn btn-secondary">
                     Click here!
                   </button>
                 </OverlayTrigger>
@@ -313,7 +311,7 @@ const GroupPage = () => {
                 <Modal.Header closeButton>
                   <Modal.Title>Error</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>{error}</Modal.Body>
+                <Modal.Body>{error && error}</Modal.Body>
                 <Modal.Footer>
                   <Button
                     variant="secondary"

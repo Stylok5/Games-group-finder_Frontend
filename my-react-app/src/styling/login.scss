@@ -5,13 +5,13 @@
 
 .main-form-login {
   display: flex;
-  // background-position: center;
-  background-image: linear-gradient(
-      0deg,
-      rgb(156, 152, 152),
-      rgba(156, 151, 151, 0.2)
-    ),
-    url("https://cdn.wallpapersafari.com/74/55/8RDqlF.jpg");
+  background: linear-gradient(0deg, rgb(150, 149, 149), rgba(16, 15, 15, 0.9));
+  // background-image: linear-gradient(
+  //     0deg,
+  //     rgb(156, 152, 152),
+  //     rgba(81, 80, 80, 0.2)
+  //   ),
+  //   url("https://cdn.wallpapersafari.com/74/55/8RDqlF.jpg");
   justify-content: center;
   align-items: center;
   // background-position: center;
@@ -44,6 +44,7 @@
   input {
     font-size: 15px;
     width: 28vw;
+    height: 5vh;
     text-align: center;
   }
 }
@@ -139,7 +140,7 @@
   text-align: center;
   position: relative;
   font-size: 40px;
-  top: 2rem;
+  top: 3rem;
   text-transform: uppercase;
   border-bottom: 2px solid #0d0d0d;
 }
@@ -164,7 +165,7 @@
 
 .insidecard {
   position: relative;
-  top: 2em;
+  top: 1em;
   align-items: center;
   display: flex;
   flex-direction: column;

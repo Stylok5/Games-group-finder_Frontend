@@ -12,7 +12,7 @@ const HomePage = () => {
       const res = await axios.get(`${DEV_API_URL}`);
       setGames(res.data);
       navigate("/browse");
-      console.log(res.data);
+      // console.log(res.data);
     } catch (err) {
       console.log(err);
     }

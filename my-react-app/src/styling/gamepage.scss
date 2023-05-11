@@ -139,6 +139,7 @@
   align-items: center;
   text-transform: uppercase;
   font-size: 24px;
+  font-style: italic;
   color: #0404036e;
   text-shadow: 2px 2px 3px #403f3f76;
 }
@@ -148,4 +149,16 @@
     font-size: 16px;
     top: 2em;
   }
+  .subtitle {
+    font-size: 17px !important;
+  }
+  .gamePage .card .card-body li {
+    font-size: 15px;
+  }
+}
+
+.subtitle {
+  text-align: center;
+  font-weight: normal;
+  font-size: 22px;
 }

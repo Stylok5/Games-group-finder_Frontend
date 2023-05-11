@@ -15,7 +15,7 @@ const Login = () => {
   const [buttonActive, setButtonActive] = useState(false);
 
   const onChange = (e) => {
-    console.log(e.target.value);
+    // console.log(e.target.value);
     setFormData({ ...formData, [e.target.name]: e.target.value });
     setButtonActive(true);
   };
@@ -28,9 +28,9 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await axios.post(`${DEV_API_AUTH}/login/`, formData);
-      console.log("Response:", response);
+      // console.log("Response:", response);
       const { data } = response;
-      console.log("Token:", data.token);
+      // console.log("Token:", data.token);
       const token = data.token;
       localStorage.setItem("token", token);
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
