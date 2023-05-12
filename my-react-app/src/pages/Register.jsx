@@ -8,7 +8,6 @@ import { Modal } from "react-bootstrap";
 
 const Register = () => {
   const [errorInvalid, setErrorInvalid] = useState("");
-  const [errorExists, setErrorExists] = useState("");
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -33,30 +32,13 @@ const Register = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      // if (formData.password.length < 7) {
-      //   setErrorInvalid("Invalid input please try again");
-      //   setTimeout(() => {
-      //     setErrorInvalid("");
-      //   }, 3000);
-      //   setShowAlert(true);
-      // } else {
       const res = await axios.post(`${DEV_API_AUTH}/register/`, formData);
-      // console.log(res);
       setFormData(formData);
       navigate("/login");
     } catch (err) {
       console.log(err);
       setShowAlert(true);
       setErrorInvalid(err.response.data);
-      // const errorMessages = [];
-      // if (err.response.data.email) {
-      //   errorMessages.push(err.response.data.email.join(", "));
-      // }
-      // if (err.response.data.username) {
-      //   errorMessages.push(err.response.data.username.join(", "));
-      // }
-      // const errorMessage = errorMessages.join("\n");
-      // setErrorExists(errorMessage);
       setTimeout(() => {
         setShowAlert(false);
       }, 3000);
