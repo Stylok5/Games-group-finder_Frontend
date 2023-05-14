@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { DEV_API_GROUPSURL } from "../consts-data";
 import Dropdown from "react-bootstrap/Dropdown";
 import Button from "react-bootstrap/Button";
@@ -47,13 +47,13 @@ const GroupPage = () => {
         const res = await axios.get(`${DEV_API_GROUPSURL}/${groupId}`);
         setIsLoading(false);
         setGroup(res.data);
-        // console.log(res);
+        console.log(res.data);
       } catch (err) {
         console.log(err);
       }
     };
     getGroup();
-  }, [groupId]);
+  }, []);
 
   const joinGroup = async (groupid) => {
     try {
@@ -76,7 +76,9 @@ const GroupPage = () => {
 
   const chatBoxRef = useRef(null);
   useEffect(() => {
-    chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
+    if (chatBoxRef.current) {
+      chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
+    }
   }, [group]);
 
   const addChat = async (groupid) => {
@@ -123,30 +125,6 @@ const GroupPage = () => {
   const handleEditClick = () => {
     setEditingField(true);
   };
-  const [showAlert, setShowAlert] = useState(false);
-  const handleSaveClick = async () => {
-    try {
-      const res = await axios.put(`${DEV_API_GROUPSURL}/${groupId}/`, {
-        name: groupData.name,
-        description: groupData.description,
-      });
-      // setGroup(res.data);
-      setGroupData({ name: res.data.name, description: res.data.description });
-      setOriginalGroupData({
-        name: res.data.name,
-        description: res.data.description,
-      });
-      setEditable(false);
-      setEditingField(null);
-    } catch (err) {
-      setError(err.response.data.error.name[0]);
-      setShowAlert(true);
-      console.log(err.response.data.error.name[0]);
-      setTimeout(() => {
-        setShowAlert(false);
-      }, 3000);
-    }
-  };
 
   const handleCancelClick = () => {
     setEditable(false);
@@ -192,6 +170,31 @@ const GroupPage = () => {
     });
   }, [group]);
 
+  const [showAlert, setShowAlert] = useState(false);
+  const handleSaveClick = async () => {
+    try {
+      const res = await axios.put(`${DEV_API_GROUPSURL}/${groupId}/`, {
+        name: groupData.name,
+        description: groupData.description,
+      });
+      // setGroup(res.data);
+      setGroupData({ name: res.data.name, description: res.data.description });
+      setOriginalGroupData({
+        name: res.data.name,
+        description: res.data.description,
+      });
+      setEditable(false);
+      setEditingField(null);
+    } catch (err) {
+      setError(err.response.data.error.name[0]);
+      setShowAlert(true);
+      console.log(err.response.data.error.name[0]);
+      setTimeout(() => {
+        setShowAlert(false);
+      }, 3000);
+    }
+  };
+
   const leaveGroup = async (groupid) => {
     try {
       const res1 = await axios.delete(
@@ -211,9 +214,9 @@ const GroupPage = () => {
     disliked: null,
   });
 
-  const addLike = async (groupId) => {
+  const addLike = async (groupid) => {
     try {
-      const res = await axios.post(`${DEV_API_GROUPSURL}/${groupId}/like/`);
+      const res = await axios.post(`${DEV_API_GROUPSURL}/${groupid}/like/`);
       // console.log(res);
       const res2 = await axios.get(`${DEV_API_GROUPSURL}/${groupId}`);
       setGroup(res2.data);
@@ -223,9 +226,9 @@ const GroupPage = () => {
     }
   };
 
-  const addDislike = async (groupId) => {
+  const addDislike = async (groupid) => {
     try {
-      const res = await axios.post(`${DEV_API_GROUPSURL}/${groupId}/dislike/`);
+      const res = await axios.post(`${DEV_API_GROUPSURL}/${groupid}/dislike/`);
       // console.log(res);
       const res2 = await axios.get(`${DEV_API_GROUPSURL}/${groupId}`);
       setGroup(res2.data);
@@ -235,316 +238,324 @@ const GroupPage = () => {
     }
   };
 
+  const navigate = useNavigate();
+  const clickMember = async (userid) => {
+    navigate(`/users/${userid}`);
+  };
+
+  const foundMember =
+    (group.members &&
+      group.members.find((member) => member.username === user.username)) ||
+    null;
+
   return (
     <div className="groupPage">
-      <ul className="groupscard" key="title">
-        <div className="cardetails">
-          <div className="cardetails-body">
-            <div className="popups">
-              {!isOwner ? (
-                <OverlayTrigger
-                  trigger="click"
-                  placement="top"
-                  overlay={
-                    <Popover>
-                      <Popover.Header as="h3">Popover title</Popover.Header>
-                      <Popover.Body>
-                        Log in to join the group and chat with your fellow
-                        members. Don't forget to leave a rating!
-                      </Popover.Body>
-                    </Popover>
-                  }
-                >
-                  <button type="button" className="btn btn-secondary">
-                    Click here!
-                  </button>
-                </OverlayTrigger>
-              ) : (
-                <OverlayTrigger
-                  trigger="click"
-                  placement="top"
-                  overlay={
-                    <Popover>
-                      <Popover.Header as="h3">Popover title</Popover.Header>
-                      <Popover.Body>
-                        Edit your group details. Remove members by opening the
-                        dropdown menu
-                      </Popover.Body>
-                    </Popover>
-                  }
-                >
-                  <button type="button" className="btn btn-secondary">
-                    Click here!
-                  </button>
-                </OverlayTrigger>
-              )}
-            </div>
-            {editable && editingField === "name" && isOwner ? (
-              <div className="group-info-section">
-                <span className="nametext">Group name:</span>
-                <input
-                  className="input-group-text"
-                  id="addon-wrapping"
-                  name="name"
-                  value={groupData.name}
-                  onChange={handleInputChange}
-                  onKeyDown={handleInputKeyDown}
-                  onClick={(e) => handleTextareaClick(e, "name")}
-                />
-              </div>
-            ) : (
-              <div className="group-info-section">
-                <span className="nametext">Group name:</span>
-                {groupData.name}
-                {isOwner && (
-                  <button
-                    className="groupEdit"
-                    onClick={() => toggleEditable("name")}
+      {isLoading ? (
+        <div className="spinner-border text-primary" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      ) : (
+        <ul className="groupscard" key="title">
+          <div className="cardetails">
+            <div className="cardetails-body">
+              <div className="popups">
+                {!isOwner ? (
+                  <OverlayTrigger
+                    trigger="click"
+                    placement="top"
+                    overlay={
+                      <Popover>
+                        <Popover.Body>
+                          Log in to join the group and chat with your fellow
+                          members. Don't forget to leave a rating!
+                        </Popover.Body>
+                      </Popover>
+                    }
                   >
-                    Edit
-                  </button>
+                    <button type="button" className="btn btn-secondary">
+                      Click here!
+                    </button>
+                  </OverlayTrigger>
+                ) : (
+                  <OverlayTrigger
+                    trigger="click"
+                    placement="top"
+                    overlay={
+                      <Popover>
+                        <Popover.Body>
+                          Edit your group details. Remove members by opening the
+                          dropdown menu
+                        </Popover.Body>
+                      </Popover>
+                    }
+                  >
+                    <button type="button" className="btn btn-secondary">
+                      Click here!
+                    </button>
+                  </OverlayTrigger>
                 )}
               </div>
-            )}
-            {error && (
-              <Modal show={showAlert} onHide={() => setShowAlert(false)}>
-                <Modal.Header closeButton>
-                  <Modal.Title>Error</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>{error && error}</Modal.Body>
-                <Modal.Footer>
-                  <Button
-                    variant="secondary"
-                    onClick={() => setShowAlert(false)}
-                  >
-                    Close
-                  </Button>
-                </Modal.Footer>
-              </Modal>
-            )}
-            <div className="descriptiontext">
-              {editable && editingField === "description" && isOwner ? (
+              {editable && editingField === "name" && isOwner ? (
                 <div className="group-info-section">
-                  <span>Description:</span>
+                  <span className="nametext">Group name:</span>
                   <input
                     className="input-group-text"
                     id="addon-wrapping"
-                    name="description"
-                    value={groupData.description}
+                    name="name"
+                    value={groupData.name}
                     onChange={handleInputChange}
                     onKeyDown={handleInputKeyDown}
-                    onClick={(e) => handleTextareaClick(e, "description")}
+                    onClick={(e) => handleTextareaClick(e, "name")}
                   />
                 </div>
               ) : (
                 <div className="group-info-section">
-                  <span className="nametext">Description:</span>
-                  {groupData.description}
-
+                  <span className="nametext">Group name:</span>
+                  {groupData.name}
                   {isOwner && (
                     <button
                       className="groupEdit"
-                      onClick={() => toggleEditable("description")}
+                      onClick={() => toggleEditable("name")}
                     >
                       Edit
                     </button>
                   )}
                 </div>
               )}
-            </div>
-            {editable && isOwner && (
-              <div>
-                <button className="savebtn" onClick={handleSaveClick}>
-                  Save
-                </button>
-                <button className="cancelbtn" onClick={handleInputBlur}>
-                  Cancel
-                </button>
-              </div>
-            )}
-            <div className="owner">
-              <p className="ownertext">Created by:</p>
-
-              {group.owner && (
-                <div className="owner-info">
-                  <span>{group.game.title}</span>
-                  {group.owner.profile_image ? (
-                    <img
-                      src={group.owner.profile_image}
-                      alt={group.owner.username}
+              {error && (
+                <Modal show={showAlert} onHide={() => setShowAlert(false)}>
+                  <Modal.Header closeButton>
+                    <Modal.Title>Error</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>{error && error}</Modal.Body>
+                  <Modal.Footer>
+                    <Button
+                      variant="secondary"
+                      onClick={() => setShowAlert(false)}
+                    >
+                      Close
+                    </Button>
+                  </Modal.Footer>
+                </Modal>
+              )}
+              <div className="descriptiontext">
+                {editable && editingField === "description" && isOwner ? (
+                  <div className="group-info-section">
+                    <span>Description:</span>
+                    <input
+                      className="input-group-text"
+                      id="addon-wrapping"
+                      name="description"
+                      value={groupData.description}
+                      onChange={handleInputChange}
+                      onKeyDown={handleInputKeyDown}
+                      onClick={(e) => handleTextareaClick(e, "description")}
                     />
-                  ) : (
-                    <span
-                      style={{
-                        visibility: "hidden",
-                      }}
-                    ></span>
-                  )}
-                  {loggedIn ? (
-                    <Link to={`/users/${group.owner.id}`}>
-                      {group.owner.username}
-                    </Link>
-                  ) : (
-                    group.owner.username
-                  )}
+                  </div>
+                ) : (
+                  <div className="group-info-section">
+                    <span className="nametext">Description:</span>
+                    {groupData.description}
+
+                    {isOwner && (
+                      <button
+                        className="groupEdit"
+                        onClick={() => toggleEditable("description")}
+                      >
+                        Edit
+                      </button>
+                    )}
+                  </div>
+                )}
+              </div>
+              {editable && isOwner && (
+                <div>
+                  <button className="savebtn" onClick={handleSaveClick}>
+                    Save
+                  </button>
+                  <button className="cancelbtn" onClick={handleInputBlur}>
+                    Cancel
+                  </button>
                 </div>
               )}
-            </div>
-            <div className="likedislikebtns">
-              <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  addLike(groupId);
-                }}
-                className={
-                  !loggedIn || clicked.liked ? "disabledlike" : "likebtn"
-                }
-                disabled={clicked.liked}
-              ></button>
-              <span className="spanlike"> {group.likes}</span>
-              <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  addDislike(groupId);
-                }}
-                className={
-                  !loggedIn || clicked.disliked
-                    ? "disableddislike"
-                    : "dislikebtn"
-                }
-                disabled={clicked.disliked}
-              ></button>
-              <span className="dislikespan"> {group.dislikes}</span>
-            </div>
-            <div className="dropdownmembers">
-              <Dropdown>
-                <Dropdown.Toggle
-                  as={Button}
-                  className="membersbtn"
-                  variant="secondary"
-                  id="dropdown-basic"
-                >
-                  Members
-                </Dropdown.Toggle>
-                <Dropdown.Menu>
-                  {group.members &&
-                    group.members.map((member, ind) => (
-                      <Dropdown.Item className="member" key={ind}>
-                        <span className="memberuser">
-                          {loggedIn ? (
-                            <Link
-                              className="member-link"
-                              to={`/users/${member.user}`}
-                            >
-                              {member.profile_image ? (
-                                <img
-                                  src={member.profile_image}
-                                  alt={member.username}
-                                />
-                              ) : (
-                                <span style={{ visibility: "hidden" }}></span>
-                              )}
-                              {member.username}
-                            </Link>
-                          ) : (
-                            <div>
-                              {member.profile_image ? (
-                                <img
-                                  src={member.profile_image}
-                                  alt={member.username}
-                                />
-                              ) : (
-                                <span style={{ visibility: "hidden" }}></span>
-                              )}
-                              {member.username}
-                            </div>
-                          )}
-                        </span>
+              <div className="owner">
+                <p className="ownertext">Created by:</p>
 
-                        {group.owner &&
-                          group.owner.username === user.username && (
-                            <button
-                              type="button"
-                              className="removeMember"
-                              onClick={() =>
-                                removeFromList(group.id, member.id)
-                              }
-                            >
-                              -
-                            </button>
-                          )}
-                      </Dropdown.Item>
-                    ))}
-                </Dropdown.Menu>
-              </Dropdown>
-            </div>
-            <div className="chatbox" ref={chatBoxRef}>
-              {group.groupchat_messages &&
-              group.groupchat_messages.length === 0 ? (
-                <h2 className="chatempty">No messages have been added yet</h2>
-              ) : (
-                group.groupchat_messages &&
-                group.groupchat_messages.map((message, ind) => (
-                  <div className="chat-message" key={ind}>
-                    <p className="timestamp">{message.created_at}</p>
-                    <h6 className="messageuser">{message.created_by}</h6>
-                    <p>{message.message_text}</p>
-                  </div>
-                ))
-              )}
-            </div>
-            <div className="inputmessage">
-              {loggedIn &&
-                (isOwner ||
-                  (group.members &&
-                    group.members.find(
-                      (member) => member.username === user.username
-                    ))) && (
-                  <Form
-                    className="review-form"
-                    onSubmit={(e) => {
-                      e.preventDefault();
-                      addChat(groupId);
-                    }}
-                  >
-                    <Form.Group className="d-flex mb-3">
-                      <Form.Control
-                        className="mr-2"
-                        id="floatingTextarea"
-                        type="text"
-                        placeholder="Add a message"
-                        onChange={onChangeHandler}
-                        value={chat}
+                {group.owner && (
+                  <div className="owner-info">
+                    <span>{group.game.title}</span>
+                    {group.owner.profile_image ? (
+                      <img
+                        src={group.owner.profile_image}
+                        alt={group.owner.username}
                       />
-                      {chat ? (
-                        <Button
-                          className="submitbtn"
-                          variant="secondary"
-                          type="submit"
-                        >
-                          Submit
-                        </Button>
-                      ) : (
-                        <Button
-                          className="submitbtn"
-                          variant="secondary"
-                          disabled
-                        >
-                          Submit
-                        </Button>
-                      )}
-                    </Form.Group>
-                  </Form>
+                    ) : (
+                      <span
+                        style={{
+                          visibility: "hidden",
+                        }}
+                      ></span>
+                    )}
+                    {loggedIn ? (
+                      <Link to={`/users/${group.owner.id}`}>
+                        {group.owner.username}
+                      </Link>
+                    ) : (
+                      group.owner.username
+                    )}
+                  </div>
                 )}
-            </div>
-            <div className="joinleavebtns">
-              {loggedIn &&
-                group.owner &&
-                !isOwner &&
-                group.members &&
-                !group.members.find(
-                  (member) => member.username === user.username
-                ) && (
+              </div>
+              <div className="likeDislikebtns">
+                <p>Join and leave your rating!</p>
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    addLike(groupId);
+                  }}
+                  className={
+                    !loggedIn || clicked.liked || !foundMember
+                      ? "disabledlike"
+                      : "likebtn"
+                  }
+                  disabled={!loggedIn || clicked.liked || !foundMember}
+                ></button>
+                <span className="spanlike">{group.likes}</span>
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    addDislike(groupId);
+                  }}
+                  className={
+                    !loggedIn || clicked.disliked || !foundMember
+                      ? "disableddislike"
+                      : "dislikebtn"
+                  }
+                  disabled={!loggedIn || clicked.disliked || !foundMember}
+                ></button>
+                <span className="dislikespan"> {group.dislikes}</span>
+              </div>
+              <div className="dropdownmembers">
+                <Dropdown>
+                  <Dropdown.Toggle
+                    as={Button}
+                    className="membersbtn"
+                    variant="secondary"
+                    id="dropdown-basic"
+                  >
+                    Members
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu>
+                    {group.members &&
+                      group.members.map((member, ind) => (
+                        <Dropdown.Item className="member" key={ind}>
+                          <span className="memberuser">
+                            {loggedIn ? (
+                              <button
+                                className="member-link"
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  clickMember(member.user);
+                                }}
+                              >
+                                {member.profile_image ? (
+                                  <img
+                                    src={member.profile_image}
+                                    alt={member.username}
+                                  />
+                                ) : (
+                                  <span style={{ visibility: "hidden" }}></span>
+                                )}
+                                {member.username}
+                              </button>
+                            ) : (
+                              <div>
+                                {member.profile_image ? (
+                                  <img
+                                    src={member.profile_image}
+                                    alt={member.username}
+                                  />
+                                ) : (
+                                  <span style={{ visibility: "hidden" }}></span>
+                                )}
+                                {member.username}
+                              </div>
+                            )}
+                          </span>
+                          {group.owner &&
+                            group.owner.username === user.username && (
+                              <button
+                                type="button"
+                                className="removeMember"
+                                onClick={() =>
+                                  removeFromList(group.id, member.id)
+                                }
+                              >
+                                -
+                              </button>
+                            )}
+                        </Dropdown.Item>
+                      ))}
+                  </Dropdown.Menu>
+                </Dropdown>
+              </div>
+              <div className="chatbox" ref={chatBoxRef}>
+                {group.groupchat_messages &&
+                group.groupchat_messages.length === 0 ? (
+                  <h2 className="chatempty">No messages have been added yet</h2>
+                ) : (
+                  group.groupchat_messages &&
+                  group.groupchat_messages.map((message, ind) => (
+                    <div className="chat-message" key={ind}>
+                      <p className="timestamp">{message.created_at}</p>
+                      <h6 className="messageuser">{message.created_by}</h6>
+                      <p>{message.message_text}</p>
+                    </div>
+                  ))
+                )}
+              </div>
+              <div className="inputmessage">
+                {(loggedIn && isOwner) ||
+                  (foundMember && (
+                    <Form
+                      className="review-form"
+                      onSubmit={(e) => {
+                        e.preventDefault();
+                        addChat(groupId);
+                      }}
+                    >
+                      <Form.Group className="d-flex mb-3">
+                        <Form.Control
+                          className="mr-2"
+                          id="floatingTextarea"
+                          type="text"
+                          placeholder="Add a message"
+                          onChange={onChangeHandler}
+                          value={chat}
+                        />
+                        {chat ? (
+                          <Button
+                            className="submitbtn"
+                            variant="secondary"
+                            type="submit"
+                          >
+                            Submit
+                          </Button>
+                        ) : (
+                          <Button
+                            className="submitbtn"
+                            variant="secondary"
+                            disabled
+                          >
+                            Submit
+                          </Button>
+                        )}
+                      </Form.Group>
+                    </Form>
+                  ))}
+              </div>
+              <div className="joinleavebtns">
+                {loggedIn && !isOwner && !foundMember && (
                   <button
                     className="joinbtn"
                     onClick={(e) => {
@@ -555,10 +566,7 @@ const GroupPage = () => {
                     Join group
                   </button>
                 )}
-              {group.members &&
-                group.members.find(
-                  (member) => member.username === user.username
-                ) && (
+                {loggedIn && foundMember && (
                   <button
                     className="leavebtn"
                     onClick={(e) => {
@@ -569,10 +577,11 @@ const GroupPage = () => {
                     Leave group
                   </button>
                 )}
+              </div>
             </div>
           </div>
-        </div>
-      </ul>
+        </ul>
+      )}
     </div>
   );
 };

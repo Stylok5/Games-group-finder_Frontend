@@ -77,8 +77,10 @@ const UserPage = () => {
     getGames();
   }, []);
 
+  const [showAlert, setShowAlert] = useState(false);
   const [toggleText, setToggleText] = useState("Select a game");
   const isCurrentUser = user.email === currentUser.email;
+
   const onChangeHandler = (e) => {
     setGroup({
       ...group,
@@ -86,7 +88,7 @@ const UserPage = () => {
     });
     // console.log(group);
   };
-  const [showAlert, setShowAlert] = useState(false);
+
   const createGroup = async (e) => {
     e.preventDefault();
     try {
@@ -210,7 +212,6 @@ const UserPage = () => {
               placement="top"
               overlay={
                 <Popover>
-                  <Popover.Header as="h3">Popover title</Popover.Header>
                   <Popover.Body>
                     Edit your profile details. Create or delete a group. Click
                     on the group cards to navigate to the group's page.

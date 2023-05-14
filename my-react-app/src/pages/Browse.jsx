@@ -28,7 +28,6 @@ const Browse = () => {
     getGames(currentPage);
 
     const handleGetGames = getGames;
-
     return () => {
       window.removeEventListener("popstate", handlePopstate);
     };

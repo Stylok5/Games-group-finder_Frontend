@@ -240,7 +240,7 @@
     color: #0266d1 !important;
   }
   a:active {
-    transform: scale(0.9);
+    transform: scale(1.1);
   }
 
   img {
@@ -349,17 +349,10 @@
   transform: scale(0.9);
 }
 
-.likedislikebtns {
+.likeDislikebtns {
   width: 18em;
-  top: 60px;
+  top: 48px;
   position: relative;
-}
-
-.likesspan {
-  font-size: 18px;
-  position: relative;
-  top: 6px;
-  margin-left: 6px;
 }
 
 .spanlike {
@@ -370,6 +363,7 @@
 .dislikespan {
   width: 30px;
 }
+
 .dislikespan {
   font-weight: normal !important;
   position: relative;
@@ -384,20 +378,19 @@
   position: relative;
   bottom: 1.2vh;
   right: 0.2vw;
-  opacity: 0.2;
-  cursor: pointer;
+  opacity: 0.3;
   background-image: url("https://www.macmillandictionary.com/external/slideshow/full/emoji_thumbs-up_full.jpg");
   background-position: center;
   background-size: cover;
 }
+
 .disableddislike {
   border: none;
   padding: 15px;
   position: relative;
   bottom: 6px;
   left: 3px;
-  opacity: 0.2;
-  cursor: pointer;
+  opacity: 0.3;
   background-image: url("https://www.macmillandictionary.com/external/slideshow/full/emoji_thumbs-down_full.jpg");
   background-position: center;
   background-size: cover;
@@ -518,4 +511,29 @@
 
 .dropdownmembers .btn-secondary:active {
   box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.3);
+}
+
+.member-link {
+  border: none !important;
+  background-color: transparent !important;
+  padding: 0 !important;
+  color: #007bff !important;
+  cursor: pointer !important;
+}
+
+.member-link:active {
+  width: 0px;
+  transform: scale(1.1);
+}
+
+.member-link:hover {
+  text-decoration: underline;
+  color: #0266d1 !important;
+}
+
+.dropdown-menu {
+  --bs-dropdown-link-hover-bg: rgb(232, 230, 230) !important;
+  --bs-dropdown-link-active-color: none !important;
+  --bs-dropdown-link-active-bg: none !important;
+  --bs-dropdown-link-disabled-color: none !important;
 }
