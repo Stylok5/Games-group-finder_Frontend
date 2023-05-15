@@ -24,9 +24,9 @@ To set up the frontend run the following commands:
 
 Project 4 was the most challenging and rewarding project I undertook during my GA immersive course. I wanted to achieve as many stretch goals as possible and spent considerable time refining my design and style. Initially, I had various ideas for the project, but after consulting with my instructors, I decided to build a multiplayer game group finder. As a lifelong gamer, I was passionate about this idea and put a lot of effort into the project. The group finder was completed within a 17-day period, and it was the last project for our immersive GA course. The backend database was deployed using Heroku, while the frontend was deployed on Netlify. Creating this project with Python Django was a new and exciting yet challenging experience for me. It was my first time working on a larger scale project with this language, but I found working on it quite intriguing and enjoyable.
 
-You can find the deployed project [here](https://games-group-finder.netlify.app/)
+You can find the deployed project [here](https://bit.ly/3pIG3Df)
 
-As most actions are locked before authentication registration would be required, but you can also use the premade user's credential which would be: user@gmail.com for email and **userPassword** for password.
+As most actions are locked before authentication registration would be required, but you can also use the premade user's credential which would be: user@gmail.com for email and **userPassword** for password. You can also login with user1@gmail.com and user2@gmail.com using the same password as before, if you want to perform adittional tests.
 
 ![Alt text](https://i.imgur.com/RE50Eee.png "Optional title")
 
@@ -216,11 +216,11 @@ Since most of the functionality for the user's page had already been implemented
 
 ### Day 13,14,15,16
 
-Over the course of the next four days, I focused on styling the project and making it responsive. This was accomplished through the use of Bootstrap and media queries.
+During the next four days, I dedicated my efforts to styling the project and ensuring that it was responsive. The task proved to be quite challenging, but I ultimately found the end result to be very satisfying. I utilized the inspect tool in my browser to navigate through elements, test different approaches, and observe results in real-time. This approach alongside using Bootstrap and media queries to make the styling more responsive significantly accelerated my progress and helped me achieve the desired outcome.
 
 ### Day 17
 
-The project was developed using version control with Git. Whenever changes were made, the changes were saved using "git add ." command, then committed using "git commit -m" command along with a message describing the changes, and finally pushed to two different GitHub repositories for the backend and frontend using "git push" command.
+On the last day, I allocated some time to address some of the remaining bugs and enhance the styling. Afterward, we deployed the backend to Heroku with guidance from our instructor and the frontend to Netlify. The project was developed using version control with Git. Whenever changes were made, the changes were saved using "git add ." command, then committed using "git commit -m" command along with a message describing the changes, and finally pushed to two different GitHub repositories for the backend and frontend using "git push" command.
 
 ## Final project:
 
@@ -264,17 +264,21 @@ During the project, I encountered various challenges, including resolving persis
 
 ## Bugs
 
-Occasionally, I encounter internal server errors when refreshing or navigating pages, particularly on the user page. I believe this is due to retrieving both the currently logged-in user and a user's ID data when clicking on the username or in the navbar or footer or another user's username link. This conflict may be resolved by selectively rendering a user's information based on whether they are the logged-in user or another user.
+There are occasional internal server errors when refreshing or navigating pages, specifically on the user page. The issue appears to stem from attempting to retrieve both the currently logged-in user's data and another user's ID data when clicking on a username link in the navbar, footer, or on another user's profile page. This conflict may cause the page to break and malfunction, but a refresh usually resolves the issue. One potential solution is to selectively render a user's information based on whether they are the logged-in user or another user. Additionally, it may be helpful to review the code and ensure that any incorrect logic is corrected.
 
 ## Future Content and Improvements
 
 Some of my future content plans:
 
-- Refactoring code to make it more concise, DRY, and easier to understand."
+- Refactoring code to make it more concise, DRY, and easier to read.
 - Implementing the like and dislike functionality correctly
 - Further improving upon the styling and responsiveness
 - Enabling users to send friend requests and messages to each other
 - Adding more information about each game, such as links to purchase sites and real-time data from Steam charts regarding the number of players currently in game
+
+### Update
+
+The ratings feature has been implemented, currently exploring options to save the user's actions on the frontend even after a page refresh. One possible solution would be to use local storage.
 
 ## Key Learnings
 
