@@ -47,7 +47,6 @@ const GroupPage = () => {
         const res = await axios.get(`${DEV_API_GROUPSURL}/${groupId}`);
         setIsLoading(false);
         setGroup(res.data);
-        console.log(res.data);
       } catch (err) {
         console.log(err);
       }

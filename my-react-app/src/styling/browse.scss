@@ -75,7 +75,7 @@
   transition: all 0.3s ease-in-out;
 }
 .game-card:active {
-  transform: scale(0.95);
+  transform: scale(0.98);
 }
 .game-image {
   height: auto;
@@ -140,4 +140,9 @@
   position: absolute;
   top: 40vh !important;
   left: 50vw !important;
+}
+
+.linksnavbar {
+  position: relative;
+  bottom: 0.1px;
 }

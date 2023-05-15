@@ -40,10 +40,10 @@
 }
 
 .normal-img {
-  max-width: 25%;
+  max-width: 22%;
   position: relative;
   margin-left: 3em;
-  bottom: 14px;
+  bottom: 10px;
   border-radius: 50%;
 }
 @media (min-width: 1800px) {
@@ -65,7 +65,7 @@
   max-width: 20%;
   position: relative;
   left: 23vw;
-  bottom: 5vh;
+  bottom: 60px;
 }
 
 .group-delete {
@@ -91,9 +91,7 @@
   border: 1px solid #91271f;
 }
 .delete-button:active {
-  transform: scale(1.2);
-  box-shadow: 0 2px 8px rgba(0, 0, 0);
-  color: #007bff !important;
+  transform: scale(1);
 }
 
 .editButtons {
@@ -198,7 +196,7 @@
   transition: all 0.2s ease-in-out;
 }
 .group-box:active {
-  transform: scale(0.97);
+  box-shadow: 0 0 30px #171c25;
 }
 .userpage a {
   text-decoration: none;
@@ -219,8 +217,7 @@
 }
 
 .owner-username:active {
-  transform: scale(1.2);
-  color: #ff4500 !important;
+  transform: scale(1.2) !important;
 }
 
 .group-box ul li {
@@ -299,6 +296,7 @@
   }
   .normal-img {
     top: 0;
+    left: 60px;
   }
   .profile-details {
     font-size: 9px;
@@ -356,10 +354,15 @@
 .popupuser .btn-secondary {
   width: 20em;
   position: relative;
-  margin-bottom: 20px;
-  bottom: 20px;
+  margin-bottom: 70px;
+  top: 34px;
 }
 
 .popupuser .btn-secondary:active {
   transform: scale(0.9);
+}
+
+.linksnavbar {
+  position: relative;
+  bottom: 0px;
 }

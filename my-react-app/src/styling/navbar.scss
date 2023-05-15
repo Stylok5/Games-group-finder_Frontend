@@ -33,15 +33,15 @@ ul {
 .secondary-nav {
   display: flex;
   justify-content: flex-end;
-  margin-right: 5em;
+  margin-right: 6.6em;
   width: 10px;
 
   img {
-    width: 30px;
     max-width: 80%;
-    height: 30px;
+    height: 1.8em;
+    // top: 2px;
     position: relative;
-    left: 12px;
+    left: 8px;
     border-radius: 50%;
   }
 }
@@ -110,16 +110,13 @@ footer {
 @media only screen and (max-width: 768px) {
   .secondary-nav img {
     width: 24px;
-    left: 3em;
-    height: auto;
+    left: 1em;
   }
   .navitem {
     font-size: 11px;
     margin-right: 37em;
   }
-  .nav-item-logout {
-    margin-bottom: 3px;
-  }
+
   .donut {
     margin-left: 15px;
   }
@@ -128,9 +125,9 @@ footer {
     margin-right: 14px;
   }
   .secondary-nav a {
-    margin-right: 1em;
+    margin-right: 2em;
     position: relative;
-    left: 30px;
+    left: 10px;
   }
   footer {
     height: 0vh;
@@ -148,8 +145,8 @@ footer {
 
 .user-info-wrapper {
   display: flex;
-  align-items: center;
-  margin-left: 2em;
+  position: relative;
+  left: 10px;
 }
 
 .user-avatar {
@@ -164,10 +161,6 @@ ul.secondary-nav {
 }
 .secondary-nav li:active {
   transform: scale(0.9);
-}
-.nav-item-logout {
-  margin-top: 2.3px;
-  margin-right: 3em;
 }
 
 .usernamenav {
