@@ -352,7 +352,7 @@
 
 .likeDislikebtns {
   width: 18em;
-  top: 80px;
+  top: 75px;
   position: relative;
 }
 
@@ -526,12 +526,14 @@
   cursor: pointer !important;
   width: 0px;
 }
-.member-link:active {
-  color: red;
-}
+
 .member-link:hover {
   text-decoration: underline;
   color: #0266d1 !important;
+}
+
+.member-link:active {
+  color: #ff4500 !important;
 }
 
 .dropdown-menu {
@@ -543,5 +545,15 @@
 
 .dropdownmembers .dropdown-item {
   position: relative;
+  height: 37px;
   right: 11px;
+}
+
+.nomembers {
+  text-transform: uppercase;
+  font-size: 13px;
+  text-align: center;
+  font-style: italic;
+  color: #0404036e;
+  text-shadow: 2px 2px 3px #403f3f76;
 }

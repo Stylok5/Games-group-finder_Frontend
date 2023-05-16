@@ -379,7 +379,6 @@ const GroupPage = () => {
               )}
               <div className="owner">
                 <p className="ownertext">Created by:</p>
-
                 {group.owner && (
                   <div className="owner-info">
                     <span>{group.game.title}</span>
@@ -445,7 +444,10 @@ const GroupPage = () => {
                     Members
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
-                    {group.members &&
+                    {group.members.length === 0 ? (
+                      <h2 className="nomembers">No members have joined yet</h2>
+                    ) : (
+                      group.members &&
                       group.members.map((member, ind) => (
                         <Dropdown.Item className="member" key={ind}>
                           <span className="memberuser">
@@ -494,7 +496,8 @@ const GroupPage = () => {
                               </button>
                             )}
                         </Dropdown.Item>
-                      ))}
+                      ))
+                    )}
                   </Dropdown.Menu>
                 </Dropdown>
               </div>
@@ -514,44 +517,43 @@ const GroupPage = () => {
                 )}
               </div>
               <div className="inputmessage">
-                {(loggedIn && isOwner) ||
-                  (foundMember && (
-                    <Form
-                      className="review-form"
-                      onSubmit={(e) => {
-                        e.preventDefault();
-                        addChat(groupId);
-                      }}
-                    >
-                      <Form.Group className="d-flex mb-3">
-                        <Form.Control
-                          className="mr-2"
-                          id="floatingTextarea"
-                          type="text"
-                          placeholder="Add a message"
-                          onChange={onChangeHandler}
-                          value={chat}
-                        />
-                        {chat ? (
-                          <Button
-                            className="submitbtn"
-                            variant="secondary"
-                            type="submit"
-                          >
-                            Submit
-                          </Button>
-                        ) : (
-                          <Button
-                            className="submitbtn"
-                            variant="secondary"
-                            disabled
-                          >
-                            Submit
-                          </Button>
-                        )}
-                      </Form.Group>
-                    </Form>
-                  ))}
+                {loggedIn && (isOwner || foundMember) && (
+                  <Form
+                    className="review-form"
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      addChat(groupId);
+                    }}
+                  >
+                    <Form.Group className="d-flex mb-3">
+                      <Form.Control
+                        className="mr-2"
+                        id="floatingTextarea"
+                        type="text"
+                        placeholder="Add a message"
+                        onChange={onChangeHandler}
+                        value={chat}
+                      />
+                      {chat ? (
+                        <Button
+                          className="submitbtn"
+                          variant="secondary"
+                          type="submit"
+                        >
+                          Submit
+                        </Button>
+                      ) : (
+                        <Button
+                          className="submitbtn"
+                          variant="secondary"
+                          disabled
+                        >
+                          Submit
+                        </Button>
+                      )}
+                    </Form.Group>
+                  </Form>
+                )}
               </div>
               <div className="joinleavebtns">
                 {loggedIn && !isOwner && !foundMember && (
