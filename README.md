@@ -205,9 +205,9 @@ Editable field in return statement that appears if the user is the owner of the 
 
 ![Alt text](https://i.imgur.com/RzLJ2hK.png "Optional title")
 
-Message form that appears if the conditions "isOwner" or a member of that group satisfied:
+Message form that appears if the conditions "isOwner" or "foundMember" are satisfied:
 
-![Alt text](https://i.imgur.com/6grR1JW.png "Optional title")
+![Alt text](https://i.imgur.com/9bQEm46.png "Optional title")
 
 Finally I began implementing the user's profile page, where the user's details could be edited by clicking on an edit button, and then saved with a save button or discarded with a cancel button. The functionality was similar to that of the group page, where the owner of the group could edit and update group details. The page also contained a form that allowed the user to create a new group. This was achieved by including a dropdown menu from which the user could select the game's name to which they wanted to add the group. This was propably the trickiest part of this page:
 
