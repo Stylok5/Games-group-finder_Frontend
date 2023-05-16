@@ -26,7 +26,7 @@ Project 4 was the most challenging and rewarding project I undertook during my G
 
 You can find the deployed project [here](https://group-finder-for-games.netlify.app/)
 
-As most actions are locked before authentication registration would be required, but you can also use the premade user's credential which would be: user@gmail.com for email and **userPassword** for password. You can also login with user1@gmail.com and user2@gmail.com using the same password as before, if you want to perform adittional tests.
+As most actions are locked before authentication registration would be required, but you can also use the premade user's credential which would be: user@gmail.com for email and **userPassword** for password. You can also login with user1@gmail.com and user2@gmail.com using the same password as before, if you want to perform additional tests. The game "Rust" which is the first one on the games list has groups already created.
 
 ![Alt text](https://i.imgur.com/RE50Eee.png "Optional title")
 
