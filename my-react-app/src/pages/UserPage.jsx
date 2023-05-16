@@ -200,14 +200,14 @@ const UserPage = () => {
 
   return (
     <div className="userpage">
-      <>
-        <div className="usercontainer">
-          <div className="popupuser">
-            {isLoading ? (
-              <div className="spinner-border text-primary" role="status">
-                <span className="visually-hidden">Loading...</span>
-              </div>
-            ) : (
+      {isLoading ? (
+        <div className="spinner-border text-primary" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      ) : (
+        <div>
+          <div className="usercontainer">
+            <div className="popupuser">
               <OverlayTrigger
                 trigger="click"
                 placement="top"
@@ -224,222 +224,222 @@ const UserPage = () => {
                   Click here!
                 </button>
               </OverlayTrigger>
-            )}
-          </div>
-          <div className="profile-details">
-            <strong>Username:</strong>{" "}
-            {isEditing ? (
-              <input
-                name="username"
-                className="input-group-text"
-                id="addon-wrapping"
-                value={formData.username}
-                onChange={onChange}
-                onKeyDown={handleKeyDown}
-              />
-            ) : (
-              user.username
-            )}
-          </div>
-          <div className=" profile-details ">
-            <strong>Profile image:</strong>{" "}
-            {isEditing ? (
-              <>
+            </div>
+            <div className="profile-details">
+              <strong>Username:</strong>{" "}
+              {isEditing ? (
                 <input
-                  name="profile_image"
+                  name="username"
                   className="input-group-text"
                   id="addon-wrapping"
-                  value={formData.profile_image}
+                  value={formData.username}
                   onChange={onChange}
                   onKeyDown={handleKeyDown}
                 />
-                <img className="preview-img" src={previewImage} />
-              </>
-            ) : user.profile_image ? (
-              <img className="normal-img" src={user.profile_image} />
-            ) : (
-              <span style={{ visibility: "hidden" }}></span>
-            )}
-          </div>
-          <li>
+              ) : (
+                user.username
+              )}
+            </div>
             <div className=" profile-details ">
-              <strong>Description:</strong>{" "}
+              <strong>Profile image:</strong>{" "}
               {isEditing ? (
-                <input
-                  name="description"
-                  className="input-group-text"
-                  id="addon-wrapping"
-                  value={formData.description}
-                  onChange={onChange}
-                  onKeyDown={handleKeyDown}
-                />
+                <>
+                  <input
+                    name="profile_image"
+                    className="input-group-text"
+                    id="addon-wrapping"
+                    value={formData.profile_image}
+                    onChange={onChange}
+                    onKeyDown={handleKeyDown}
+                  />
+                  <img className="preview-img" src={previewImage} />
+                </>
+              ) : user.profile_image ? (
+                <img className="normal-img" src={user.profile_image} />
               ) : (
-                user.description
+                <span style={{ visibility: "hidden" }}></span>
               )}
             </div>
-            <div className="profile-details ">
-              <strong>Discord Username:</strong>{" "}
-              {isEditing ? (
-                <input
-                  name="discord_username"
-                  className="input-group-text"
-                  id="addon-wrapping"
-                  value={formData.discord_username}
-                  onChange={onChange}
-                  onKeyDown={handleKeyDown}
-                />
-              ) : (
-                user.discord_username
-              )}
-            </div>
-          </li>
-          <div className="editButtons">
-            {isCurrentUser && loggedIn && (
-              <>
+            <li>
+              <div className=" profile-details ">
+                <strong>Description:</strong>{" "}
                 {isEditing ? (
-                  <li>
-                    <button onClick={updateUser}>Save Changes</button>
-                    <button onClick={handleCancel}>Cancel</button>
-                  </li>
+                  <input
+                    name="description"
+                    className="input-group-text"
+                    id="addon-wrapping"
+                    value={formData.description}
+                    onChange={onChange}
+                    onKeyDown={handleKeyDown}
+                  />
                 ) : (
-                  <li>
-                    <button onClick={handleEdit}>Edit Profile</button>
-                  </li>
+                  user.description
                 )}
-              </>
+              </div>
+              <div className="profile-details ">
+                <strong>Discord Username:</strong>{" "}
+                {isEditing ? (
+                  <input
+                    name="discord_username"
+                    className="input-group-text"
+                    id="addon-wrapping"
+                    value={formData.discord_username}
+                    onChange={onChange}
+                    onKeyDown={handleKeyDown}
+                  />
+                ) : (
+                  user.discord_username
+                )}
+              </div>
+            </li>
+            <div className="editButtons">
+              {isCurrentUser && loggedIn && (
+                <>
+                  {isEditing ? (
+                    <li>
+                      <button onClick={updateUser}>Save Changes</button>
+                      <button onClick={handleCancel}>Cancel</button>
+                    </li>
+                  ) : (
+                    <li>
+                      <button onClick={handleEdit}>Edit Profile</button>
+                    </li>
+                  )}
+                </>
+              )}
+            </div>
+          </div>
+          <div className="creategroupcontainer">
+            {isCurrentUser && loggedIn && (
+              <Card>
+                <Card.Body>
+                  <form className="list-form" onSubmit={createGroup}>
+                    <Dropdown>
+                      <Dropdown.Toggle variant="secondary" id="dropdown-games">
+                        {toggleText}
+                      </Dropdown.Toggle>
+                      <Dropdown.Menu className="gameselectbutton">
+                        <div className="scrollable-menu">
+                          {games &&
+                            games.map((game) => (
+                              <Dropdown.Item
+                                key={game.id}
+                                onClick={() => onSelectGame(game.title)}
+                              >
+                                {game.title}
+                              </Dropdown.Item>
+                            ))}
+                        </div>
+                      </Dropdown.Menu>
+                    </Dropdown>
+                    <div className="form-group">
+                      <input
+                        className="form-control"
+                        type="text"
+                        placeholder="group name"
+                        name="name"
+                        value={group.name}
+                        onChange={onChangeHandler}
+                        required
+                      />
+                    </div>
+                    <div className="form-group">
+                      <input
+                        className="form-control"
+                        type="text"
+                        placeholder="group description"
+                        name="description"
+                        value={group.description}
+                        onChange={onChangeHandler}
+                        required
+                      />
+                    </div>
+                    <Button className="listBtn" variant="light" type="submit">
+                      <p>Create a group</p>
+                    </Button>
+                  </form>
+                </Card.Body>
+              </Card>
             )}
+            <Modal show={showAlert} onHide={() => setShowAlert(false)}>
+              <Modal.Header closeButton>
+                <Modal.Title>Error</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>{error && <p>{error}</p>}</Modal.Body>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={() => setShowAlert(false)}>
+                  Close
+                </Button>
+              </Modal.Footer>
+            </Modal>
+          </div>
+          <div className="groups-container">
+            {user.groups &&
+              user.groups.map((group) => (
+                <Link
+                  key={group.id}
+                  className="group-box"
+                  to={`/groups/${group.id}`}
+                >
+                  <ul className="group-details">
+                    <li>
+                      {group.owner.email === user.email ? (
+                        <span>Group's owner</span>
+                      ) : (
+                        <div>
+                          <span>Created by </span>
+                          <div>
+                            <button
+                              className="owner-username"
+                              onClick={(e) =>
+                                e.preventDefault()(
+                                  (window.location.href = `/users/${group.owner.id}`)
+                                )
+                              }
+                            >
+                              {group.owner.username}
+                            </button>
+                          </div>
+                        </div>
+                      )}
+                    </li>
+                    <li>
+                      <span>Game:</span> {group.game}
+                    </li>
+                    <li>
+                      <span>Group title:</span> {group.name}
+                    </li>
+                    <li>
+                      <span className="descriptionText">Description:</span>{" "}
+                      {group.description}
+                    </li>
+                    <li className="likescolor">
+                      <span>Likes:</span> {group.likes}
+                    </li>
+                    <li className="dislikescolor">
+                      <span>Dislikes:</span> {group.dislikes}
+                    </li>
+                  </ul>
+                  <div className="group-delete">
+                    {group.owner.email === currentUser.email &&
+                      currentUser.email === user.email && (
+                        <button
+                          className="delete-button"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            removeGroup(group.id);
+                          }}
+                        >
+                          Delete group
+                        </button>
+                      )}
+                  </div>
+                </Link>
+              ))}
           </div>
         </div>
-        <div className="creategroupcontainer">
-          {isCurrentUser && loggedIn && (
-            <Card>
-              <Card.Body>
-                <form className="list-form" onSubmit={createGroup}>
-                  <Dropdown>
-                    <Dropdown.Toggle variant="secondary" id="dropdown-games">
-                      {toggleText}
-                    </Dropdown.Toggle>
-                    <Dropdown.Menu className="gameselectbutton">
-                      <div className="scrollable-menu">
-                        {games &&
-                          games.map((game) => (
-                            <Dropdown.Item
-                              key={game.id}
-                              onClick={() => onSelectGame(game.title)}
-                            >
-                              {game.title}
-                            </Dropdown.Item>
-                          ))}
-                      </div>
-                    </Dropdown.Menu>
-                  </Dropdown>
-                  <div className="form-group">
-                    <input
-                      className="form-control"
-                      type="text"
-                      placeholder="group name"
-                      name="name"
-                      value={group.name}
-                      onChange={onChangeHandler}
-                      required
-                    />
-                  </div>
-                  <div className="form-group">
-                    <input
-                      className="form-control"
-                      type="text"
-                      placeholder="group description"
-                      name="description"
-                      value={group.description}
-                      onChange={onChangeHandler}
-                      required
-                    />
-                  </div>
-                  <Button className="listBtn" variant="light" type="submit">
-                    <p>Create a group</p>
-                  </Button>
-                </form>
-              </Card.Body>
-            </Card>
-          )}
-          <Modal show={showAlert} onHide={() => setShowAlert(false)}>
-            <Modal.Header closeButton>
-              <Modal.Title>Error</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>{error && <p>{error}</p>}</Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={() => setShowAlert(false)}>
-                Close
-              </Button>
-            </Modal.Footer>
-          </Modal>
-        </div>
-        <div className="groups-container">
-          {user.groups &&
-            user.groups.map((group) => (
-              <Link
-                key={group.id}
-                className="group-box"
-                to={`/groups/${group.id}`}
-              >
-                <ul className="group-details">
-                  <li>
-                    {group.owner.email === user.email ? (
-                      <span>Group's owner</span>
-                    ) : (
-                      <div>
-                        <span>Created by </span>
-                        <div>
-                          <button
-                            className="owner-username"
-                            onClick={(e) =>
-                              e.preventDefault()(
-                                (window.location.href = `/users/${group.owner.id}`)
-                              )
-                            }
-                          >
-                            {group.owner.username}
-                          </button>
-                        </div>
-                      </div>
-                    )}
-                  </li>
-                  <li>
-                    <span>Game:</span> {group.game}
-                  </li>
-                  <li>
-                    <span>Group title:</span> {group.name}
-                  </li>
-                  <li>
-                    <span className="descriptionText">Description:</span>{" "}
-                    {group.description}
-                  </li>
-                  <li className="likescolor">
-                    <span>Likes:</span> {group.likes}
-                  </li>
-                  <li className="dislikescolor">
-                    <span>Dislikes:</span> {group.dislikes}
-                  </li>
-                </ul>
-                <div className="group-delete">
-                  {group.owner.email === currentUser.email &&
-                    currentUser.email === user.email && (
-                      <button
-                        className="delete-button"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                          removeGroup(group.id);
-                        }}
-                      >
-                        Delete group
-                      </button>
-                    )}
-                </div>
-              </Link>
-            ))}
-        </div>
-      </>
+      )}
     </div>
   );
 };

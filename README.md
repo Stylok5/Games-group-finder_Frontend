@@ -1,4 +1,4 @@
-# Project 4 - Group Finder for games
+# Project 4 - Gamers Assemble
 
 `Explore a wide variety of games, join an existing group or create your own. Chat with other members and provide feedback by rating the group. Personalize your profile and browse other users' profiles. `
 
@@ -154,7 +154,8 @@ Posting a message in group chat:
 
 The ratings app isn't complete yet and it doesn't work like I want it to in the frontend but I'm close:
 
-![Alt text](https://i.imgur.com/U3ZbKxY.png "Optional title")
+**(Code updated)**
+![Alt text](https://i.imgur.com/9YqqQH1.png "Optional title")
 
 The ratings feature has two view classes, one for liking and one for disliking. The ratings model contains two BooleanFields named "has_liked" and "has_disliked". These fields should be checking whether the user has liked or disliked a certain item and disables the corresponding button on the frontend. The fields also increment or decrement the respective like or dislike count when the user clicks the corresponding button.
 Another challenging one was posting a new group. Here I wanted to be able to add a new group by grabbing the title of the game that I wanted to add the group to. I then added the id of the Game object to the request data as the game field. I then set the owner field of the request data as the id of the currently authenticated user. I also set the members field to an empty list, as I did not want to add any members while creating a new group.
@@ -193,6 +194,12 @@ Join group, scroll to the bottom when new message is added, and add message func
 Remove member from list and editable fields states:
 
 ![Alt text](https://i.imgur.com/XiHoXlQ.png "Optional title")
+
+**(Code updated)**
+Dislike and like functions called when clicking the like or dislike button:
+![Alt text](https://i.imgur.com/tQ73qDl.png "Optional title")
+Dynamic Rendering of Buttons with Conditional Styling Based on User Actions:
+![Alt text](https://i.imgur.com/GvNQDqs.png "Optional title")
 
 Editable field in return statement that appears if the user is the owner of the group:
 
