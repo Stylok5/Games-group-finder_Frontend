@@ -80,10 +80,14 @@ const NavBar = () => {
             ) : (
               <>
                 <li className="nav-item">
-                  <Link to="/register">Register</Link>
+                  <Link className="registertext" to="/register">
+                    Register
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/login">Login</Link>
+                  <Link className="logintext" to="/login">
+                    Login
+                  </Link>
                 </li>
               </>
             )}

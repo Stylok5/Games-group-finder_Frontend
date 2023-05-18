@@ -9,8 +9,8 @@
 }
 
 .form-body-register {
-  height: 85vh;
-  width: 35vw;
+  height: 90vh;
+  width: 40vw;
   position: relative;
   display: flex;
   justify-content: center;
@@ -85,6 +85,7 @@
     }
     input {
       top: 4.5em;
+      width: 15em;
       height: 2.2em;
       font-size: 13px;
     }

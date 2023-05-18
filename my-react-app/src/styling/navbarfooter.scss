@@ -109,10 +109,11 @@ footer {
     width: 24px;
     height: auto;
   }
+
   .navitem {
     font-size: 15px;
     height: 15vh;
-    margin-right: 19em;
+    margin-right: 18em;
   }
 
   .donut {
@@ -161,4 +162,12 @@ ul.secondary-nav {
 
 .usernamenav {
   width: 1vw;
+}
+
+.registertext {
+  margin-right: 65px;
+}
+.logintext {
+  position: relative;
+  right: 65px;
 }
