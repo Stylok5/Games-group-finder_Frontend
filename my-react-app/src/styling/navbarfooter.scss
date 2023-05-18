@@ -84,9 +84,9 @@ ul {
 //Footer
 footer {
   height: 11vh;
-  width: 98.8vw;
   background-color: #1e274d;
   position: relative;
+
   bottom: 0;
   display: flex;
   flex-direction: column;
@@ -94,10 +94,8 @@ footer {
   justify-content: center;
 }
 .foot {
-  align-items: start;
   display: flex;
   align-items: center;
-  margin-left: 10px;
   justify-content: center;
   height: 8vh;
   border: 1px solid #266388;
@@ -109,30 +107,24 @@ footer {
 @media only screen and (max-width: 768px) {
   .secondary-nav img {
     width: 24px;
-    left: 3em;
     height: auto;
   }
   .navitem {
-    font-size: 11px;
-    height: 12vh;
-    margin-right: 37em;
+    font-size: 15px;
+    height: 15vh;
+    margin-right: 19em;
   }
 
   .donut {
-    margin-left: 15px;
+    margin-left: 1px;
   }
   .foot {
-    width: 99vw;
-    margin-right: 14px;
+    width: 100%;
+    height: 10vh;
   }
-  .secondary-nav a {
-    margin-right: 1em;
-    position: relative;
-    left: 30px;
-  }
+
   footer {
-    height: 0vh;
-    font-size: 12px;
+    font-size: 15px;
   }
 }
 

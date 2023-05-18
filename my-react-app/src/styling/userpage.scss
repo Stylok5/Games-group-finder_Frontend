@@ -257,6 +257,12 @@
     position: relative;
     right: 2.5px;
   }
+  .editButtons {
+    li button {
+      font-size: 10px;
+      padding: 10px;
+    }
+  }
   .dropdown button {
     width: 11em;
     font-size: 10px !important;
@@ -296,7 +302,9 @@
   }
   .normal-img {
     top: 0;
-    left: 60px;
+  }
+  .preview-img {
+    bottom: 30px;
   }
   .profile-details {
     font-size: 9px;
@@ -318,24 +326,6 @@
 }
 .userpage span {
   font-weight: bold;
-}
-
-@keyframes shake {
-  0% {
-    transform: translateX(0);
-  }
-  25% {
-    transform: translateX(10px);
-  }
-  50% {
-    transform: translateX(0);
-  }
-  75% {
-    transform: translateX(-10px);
-  }
-  100% {
-    transform: translateX(0);
-  }
 }
 
 .likescolor {
