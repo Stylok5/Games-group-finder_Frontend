@@ -56,30 +56,13 @@ As most actions are locked before authentication registration would be required,
 
 ### Backend:
 
-- Django==4.2.1 (web framework)
-- djangorestframework==3.14.0 (API framework)
-- psycopg2-binary==2.9.6 (Python library for PostgreSQL database)
-- asgiref==3.6.0 (ASGI specification implementation)
-- django-cors-headers==3.14.0 (handling of Cross-Origin Resource Sharing)
+- Django: a Python web framework used for building the project.
+- Pylint: a static code analysis tool used for Python code quality.
+- PyJWT: a Python library used for JSON Web Token (JWT) authentication.
+- psycopg2-binary: a PostgreSQL adapter for Python used for connecting Django with PostgreSQL database.
+- django-cors-headers: a Django library used for handling Cross-Origin Resource Sharing (CORS) headers.
 - django-on-heroku==1.1.2 (library for deploying Django projects on Heroku)
-- Pillow==9.5.0 (Python Imaging Library for image processing)
-- PyJWT==2.6.0 (JSON Web Token implementation)
-- sqlparse==0.4.4 (SQL parsing library)
-- whitenoise==6.4.0 (static file serving library)
-- astroid==2.15.4 (Python code analyzer)
-- autopep8==2.0.2 (Python code formatter)
-- dill==0.3.6 (Python object serializer)
-- dj-database-url==2.0.0 (database configuration parser)
-- isort==5.12.0 (Python import sorter)
-- lazy-object-proxy==1.9.0 (Python object proxy)
-- mccabe==0.7.0 (Python code complexity checker)
-- platformdirs==3.5.0 (cross-platform directories module)
-- pycodestyle==2.10.0 (Python code style checker)
-- pylint==2.17.3 (Python code analyzer)
-- pytz==2023.3 (Python timezone library)
-- tomlkit==0.11.8 (Python TOML parser)
-- typing_extensions==4.5.0 (backports of newer typing module features)
-- wrapt==1.15.0 (Python object proxy)
+- django-rest-framework: a powerful and flexible toolkit for building Web APIs with Django.
 
 ### Frontend:
 
@@ -97,6 +80,15 @@ As most actions are locked before authentication registration would be required,
 - @types/react-dom: type definitions for React DOM
 - @vitejs/plugin-react: a plugin for Vite, a build tool for modern web development, that enables support for React applications
 - Vite: a build tool for modern web development that aims to provide a faster and leaner development experience.
+
+### Development and Deployment
+
+- Git, GitHub
+- Excalidraw
+- Postman
+- Npm + Pipenv
+- Netlify
+- Heroku
 
 ## Timeline
 
