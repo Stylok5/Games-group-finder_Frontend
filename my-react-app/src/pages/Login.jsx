@@ -85,7 +85,8 @@ const Login = () => {
                   />
                 </Form.Group>
               </div>
-              <div className="loginbtn">
+
+              <div className="btncontainer">
                 {!formData.email && !formData.password ? (
                   <Button
                     className="form-btn"
@@ -107,12 +108,14 @@ const Login = () => {
                     Login
                   </Button>
                 )}
-                <div className="mt-3">
-                  <p className="text-muted">
-                    Don't have an account? <Link to="/register">Sign up</Link>
-                  </p>
-                </div>
               </div>
+
+              <div className="mt-3">
+                <p className="text-muted">
+                  Don't have an account? <Link to="/register">Sign up</Link>
+                </p>
+              </div>
+
               {error && (
                 <Modal show={showAlert} onHide={() => setShowAlert(false)}>
                   <Modal.Header closeButton>

@@ -12,8 +12,8 @@
 }
 
 .form-body-login {
-  height: 85vh;
-  width: 35vw;
+  height: 43em;
+  width: 35em;
   top: 2vh;
   margin-bottom: 8em;
   margin-top: 6em;
@@ -33,90 +33,32 @@
   margin-top: 4vh;
   min-height: calc(100vh - 12vh);
   width: 100vw;
-
+  button {
+    position: relative;
+    top: 3em;
+    width: 8em;
+  }
   input {
     font-size: 15px;
-    width: 28vw;
-    height: 5vh;
+    width: 28em;
+    height: 3.2em;
     text-align: center;
+  }
+  button:active {
+    transform: scale(0.9);
+  }
+
+  button:hover {
+    background-color: #063a88;
   }
 }
 
-@media only screen and (max-width: 768px) {
-  .form-body-login {
-    width: 20em;
-    padding-bottom: 27em;
-  }
-  .logintitle {
-    top: 2em !important;
-  }
-  .loginbtn button {
-    font-size: 12px !important;
-    width: 8em !important;
-    top: 3em !important;
-    left: 7em !important;
-    height: 3.5em !important;
-  }
-  .text-muted {
-    margin-top: 4em;
-  }
-  .error-login {
-    margin-top: -4rem !important;
-    font-size: 14px !important;
-  }
-  .form-body-login h2 {
-    font-size: 25px;
-  }
-  .main-form-login input {
-    text-align: center;
-    left: 1em;
-    width: 15em;
-  }
-
-  .logintitle {
-    font-size: 23px !important;
-    margin-bottom: 1em;
-  }
-  .mt-3 {
-    font-size: 15px !important;
-    top: 1rem !important;
-  }
-}
-@media only screen and (min-width: 1800px) {
-  .mt-3 {
-    top: 8em !important;
-  }
-  .buttonlink {
-    position: relative;
-    bottom: 3em;
-  }
-  .inputs {
-    position: relative;
-    bottom: 3em;
-  }
-  .form-body-login {
-    height: 62em;
-    width: 50em;
-  }
-  .main-form-login input {
-    font-size: 16px;
-    width: 540px !important;
-  }
-  .loginbtn button {
-    width: 14em !important;
-    top: 7em !important;
-    left: 10em !important;
-  }
-  .insidecard {
-    margin-top: 3.4em;
-  }
-}
 .mt-3 {
   text-align: center;
   position: relative;
   margin-bottom: auto;
   font-size: 20px;
-  top: 6rem;
+  top: 4em !important;
 }
 .text-muted a {
   text-decoration: none;
@@ -133,34 +75,19 @@
   text-align: center;
   position: relative;
   font-size: 40px;
-  top: 3rem;
+  top: 1em;
+  color: white;
+  padding: 10px 20px;
   text-transform: uppercase;
   border-bottom: 2px solid #0d0d0d;
 }
 
-.loginbtn button {
-  height: 50px;
-  position: relative;
-  top: 10vh;
-  width: 12vw;
-  text-transform: uppercase;
-  border-radius: 5px;
-  left: 8vw;
-  font-size: 16px;
-}
-.loginbtn button:active {
-  transform: scale(0.9);
-}
-
-.loginbtn button:hover {
-  background-color: #063a88;
-}
-
 .insidecard {
-  position: relative;
-  top: 1em;
   align-items: center;
+  justify-content: center;
   display: flex;
+  margin-top: 30px;
+  margin-bottom: 20px !important;
   flex-direction: column;
 }
 
@@ -175,4 +102,69 @@
 .inputs {
   position: relative;
   bottom: 20px;
+  margin-bottom: 40px;
+}
+
+@media only screen and (max-width: 768px) {
+  .form-body-login {
+    width: 25em;
+    height: 35em;
+  }
+  .buttonandsignup {
+    position: relative;
+    bottom: 8em;
+  }
+
+  .text-muted {
+    margin-top: 3em;
+  }
+
+  .form-body-login h2 {
+    font-size: 25px;
+  }
+  .main-form-login input {
+    text-align: center;
+    left: 10px;
+    height: 2.7em;
+    width: 16em;
+  }
+
+  .logintitle {
+    margin-top: 20px;
+    top: 30px;
+  }
+  .mt-3 {
+    font-size: 15px !important;
+  }
+}
+@media only screen and (min-width: 1800px) {
+  .mt-3 {
+    top: 9em !important;
+  }
+  .buttonlink {
+    position: relative;
+    bottom: 3em;
+  }
+  .inputs {
+    position: relative;
+    bottom: 3em;
+    height: 3em;
+  }
+  .form-body-login {
+    height: 62em;
+    width: 50em;
+  }
+  .main-form-login {
+    input {
+      font-size: 16px;
+      width: 540px !important;
+    }
+    button {
+      top: 8em;
+    }
+  }
+
+  .insidecard {
+    margin-top: 5em;
+  }
 }
