@@ -33,7 +33,7 @@
   input {
     font-size: 15px;
     width: 28em;
-    height: 4em;
+    height: 3.2em;
     text-align: center;
   }
 }
@@ -71,7 +71,7 @@
 
 @media only screen and (max-width: 768px) {
   .form-body-register {
-    width: 25em;
+    width: 90vw;
     height: 35em;
     .registerbtn button {
       width: 8em;

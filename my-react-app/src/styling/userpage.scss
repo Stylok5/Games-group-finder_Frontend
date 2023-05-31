@@ -239,7 +239,11 @@
   width: 13em !important;
 }
 .listBtn {
-  margin-top: 4em;
+  margin-top: 9vh;
+  background-color: rgb(229, 229, 229) !important;
+  &:hover {
+    background-color: rgb(183, 182, 182) !important;
+  }
 }
 .list-form button {
   position: relative;
@@ -257,6 +261,9 @@
     position: relative;
     right: 2.5px;
   }
+  .group-box {
+    width: 80vw;
+  }
   .editButtons {
     li button {
       font-size: 10px;
@@ -266,16 +273,20 @@
 
   .dropdown button {
     width: 11em;
+    top: 30px;
     font-size: 10px !important;
   }
-  .list-form button p {
-    font-size: 8px;
+  .list-form {
+    button p {
+      font-size: 8px;
+    }
+    .listBtn {
+      width: 6em;
+      height: 25px;
+      top: 0;
+    }
   }
-  .list-form .listBtn {
-    width: 6em;
-    height: 25px;
-    top: 0;
-  }
+
   .userpage {
     font-size: 12px;
   }
@@ -296,16 +307,25 @@
     height: 2em;
     font-size: 9px;
   }
+
+  .creategroupcontainer .card {
+    width: 15em;
+    bottom: 10em;
+    margin-right: 1.5em;
+    height: 29em;
+  }
+
   .dropdown-menu {
     max-height: 80px;
     width: 10px !important;
     font-size: 10px !important;
   }
   .normal-img {
-    top: 0;
+    top: 2em;
   }
   .preview-img {
-    bottom: 30px;
+    top: 2em;
+    left: 2em;
   }
   .profile-details {
     font-size: 9px;
@@ -320,9 +340,18 @@
     margin-top: 2px;
     width: 14em;
   }
-  .profile-details input {
-    width: 11.5em;
-    font-size: 9px;
+  .profile-details {
+    width: 16em;
+    input {
+      width: 11.5em;
+      font-size: 9px;
+    }
+  }
+  .groups-container {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    align-items: center;
   }
 }
 .userpage span {

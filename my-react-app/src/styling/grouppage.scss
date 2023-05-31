@@ -31,7 +31,6 @@
   padding: 6px 12px;
   text-align: center;
   text-decoration: none;
-  font-size: 14px;
   margin-top: 14px;
   margin-bottom: 4px;
   border-radius: 5px;
@@ -40,7 +39,7 @@
 }
 
 .input-group-text {
-  width: 20vw;
+  width: 25vw;
 }
 
 .groupEdit:hover {
@@ -129,7 +128,6 @@
   border: none;
   color: #fff;
   padding: 10px;
-  font-size: 16px;
   border-radius: 5px;
   margin-right: 10px;
   margin-top: 5px;
@@ -145,7 +143,6 @@
   border: none;
   color: #fff;
   padding: 10px;
-  font-size: 16px;
   margin-top: 5px;
   border-radius: 5px;
   margin-right: 10px;
@@ -245,7 +242,7 @@
   }
 
   img {
-    width: 4vw;
+    width: 4em;
     height: auto;
     margin-top: 5px;
     margin-right: 9px;
@@ -258,7 +255,7 @@
   justify-content: end;
   position: relative;
   right: 2.7vw;
-  bottom: 2em;
+  bottom: 3.4em;
 }
 
 .dropdownmembers .dropdown-menu {
@@ -413,22 +410,34 @@
 
 @media (max-width: 768px) {
   .inputmessage .form-control {
-    width: 30em !important;
+    width: 13em !important;
     padding-top: 25px;
     padding-bottom: 25px;
-    font-size: 8px;
+    font-size: 12px;
     height: 3em;
   }
-
+  .likeDislikebtns {
+    p {
+      font-size: 12px;
+    }
+  }
   .cardetails {
-    width: 100vw;
+    width: 88vw;
+    margin-right: 24px;
   }
+
   .joinbtn {
-    font-size: 11px;
+    font-size: 12px;
   }
+  .groupEdit,
+  .savebtn,
+  .cancelbtn {
+    font-size: 14px;
+  }
+
   .leavebtn {
     width: 10em;
-    font-size: 11px;
+    font-size: 12px;
     margin-left: 1.5em;
   }
   .usertitle,
@@ -441,6 +450,9 @@
     left: 0;
     bottom: 3px;
   }
+  .input-group-text {
+    width: 40vw;
+  }
   .removeMember:active {
     transform: scale(0.9) !important;
   }
@@ -452,12 +464,17 @@
     bottom: 20em;
     font-size: 10px !important;
     height: 4.7em;
-    margin-right: 20px;
+    left: 15px;
     width: 6.4em;
   }
 
-  .owner-info a {
-    font-size: 13px;
+  .owner-info {
+    a {
+      font-size: 16px;
+    }
+    img {
+      width: 2.5em;
+    }
   }
 
   .leavebtn {
@@ -469,13 +486,8 @@
     height: 3em;
   }
 
-  .owner-info a {
-    font-size: 13px;
-  }
   .dropdownmembers .btn-secondary {
-    width: 8em;
-    position: relative;
-    bottom: 4em;
+    width: 9em;
     height: 3em;
     font-size: 8px;
   }
@@ -498,8 +510,8 @@
   text-transform: uppercase;
   font-size: 28px;
   font-style: italic;
-  color: #0404036e;
-  text-shadow: 2px 2px 3px #403f3f76;
+  color: #040403;
+  text-shadow: 2px 2px 3px #403f3f4e;
 }
 
 .popups .btn-secondary {
@@ -556,6 +568,6 @@
   font-size: 13px;
   text-align: center;
   font-style: italic;
-  color: #0404036e;
-  text-shadow: 2px 2px 3px #403f3f76;
+  color: #040403;
+  text-shadow: 2px 2px 3px #403f3f4e;
 }

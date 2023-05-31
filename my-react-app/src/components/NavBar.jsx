@@ -55,28 +55,27 @@ const NavBar = () => {
           </ul>
           <ul className="secondary-nav">
             {loggedIn ? (
-              <>
-                {loggedIn && (
-                  <li className="nav-item user-info">
-                    <div className="user-info-wrapper">
-                      {user.profile_image ? (
-                        <img className="user-avatar" src={user.profile_image} />
-                      ) : (
-                        <span style={{ visibility: "hidden" }}></span>
-                      )}
-                      <span>
-                        {" "}
-                        <Link to={`/users/${user.id}`}>{user.username}</Link>
-                      </span>
-                    </div>
-                  </li>
-                )}
+              <div className="userlogout">
+                <li>
+                  <div className="user-info-wrapper">
+                    {user.profile_image ? (
+                      <img className="user-avatar" src={user.profile_image} />
+                    ) : (
+                      <span style={{ visibility: "hidden" }}></span>
+                    )}
+                    <span>
+                      {" "}
+                      <Link to={`/users/${user.id}`}>{user.username}</Link>
+                    </span>
+                  </div>
+                </li>
+
                 <li className="nav-item-logout" onClick={onLogout}>
                   <Link className="linksnavbar" to="/logout">
                     Logout
                   </Link>
                 </li>
-              </>
+              </div>
             ) : (
               <>
                 <li className="nav-item">

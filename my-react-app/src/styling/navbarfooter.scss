@@ -20,7 +20,7 @@ li {
 }
 
 ul {
-  gap: 2.5em;
+  gap: 2em;
   margin-bottom: 0 !important;
 }
 
@@ -29,6 +29,12 @@ ul {
   justify-content: flex-start;
   margin-left: 4em;
 }
+.user-info-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
 
 .secondary-nav {
   display: flex;
@@ -36,11 +42,9 @@ ul {
   margin-right: 5.7em;
 
   img {
-    width: 30px;
-    max-width: 80%;
-    height: 24px;
     position: relative;
-    left: 8px;
+    width: 22px;
+    left: 6px;
     border-radius: 50%;
   }
 }
@@ -69,13 +73,19 @@ ul {
   cursor: pointer;
   font-weight: 600;
   margin-left: 10px;
+  margin-right: 12px;
   transition: all 0.2s ease-in-out;
 }
 
 .secondary-nav a:hover {
   color: rgb(219, 22, 199) !important;
 }
-
+.userlogout {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
 .donut {
   margin: 9px 0 0 2px;
   width: 2px;
@@ -86,7 +96,6 @@ footer {
   height: 11vh;
   background-color: #1e274d;
   position: relative;
-
   bottom: 0;
   display: flex;
   flex-direction: column;
@@ -105,14 +114,17 @@ footer {
 }
 
 @media only screen and (max-width: 768px) {
-  .secondary-nav img {
-    width: 24px;
-    height: auto;
+  .secondary-nav {
+    img {
+      width: 24px;
+      height: auto;
+    }
   }
 
   .navitem {
-    font-size: 15px;
-    right: 20px;
+    font-size: 11px;
+    right: 32em;
+    width: 10px;
   }
 
   .foot {
@@ -121,51 +133,10 @@ footer {
   }
 
   footer {
-    font-size: 15px;
+    font-size: 12px;
   }
 }
 
-.user-info {
-  display: flex;
-  align-items: center;
-}
 .user-info:active {
   transform: scale(0.9);
-}
-
-.user-info-wrapper {
-  display: flex;
-  font-size: 16px;
-  align-items: center;
-  margin-left: 2em;
-}
-
-.user-avatar {
-  width: 30px;
-  height: 30px;
-  margin-right: 5px;
-  border-radius: 50%;
-}
-
-ul.secondary-nav {
-  width: 18em;
-}
-.secondary-nav li:active {
-  transform: scale(0.9);
-}
-.nav-item-logout {
-  margin-right: 3em;
-  font-size: 15.6px;
-}
-
-.usernamenav {
-  width: 1vw;
-}
-
-.registertext {
-  margin-right: 65px;
-}
-.logintext {
-  position: relative;
-  right: 65px;
 }

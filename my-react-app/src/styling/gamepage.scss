@@ -140,8 +140,8 @@
   text-transform: uppercase;
   font-size: 24px;
   font-style: italic;
-  color: #0404036e;
-  text-shadow: 2px 2px 3px #403f3f76;
+  color: #040403;
+  text-shadow: 2px 2px 3px #403f3f4e;
 }
 
 @media (max-width: 768px) {
@@ -153,13 +153,14 @@
     font-size: 17px !important;
   }
   .gamePage .card {
-    width: 30em !important;
+    width: 23em !important;
     span {
       font-size: 20px;
     }
   }
   .gamePage .card .card-body li {
     font-size: 15px;
+    width: 20em;
   }
 }
 

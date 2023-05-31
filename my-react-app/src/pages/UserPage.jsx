@@ -261,7 +261,7 @@ const UserPage = () => {
               )}
             </div>
             <li>
-              <div className=" profile-details ">
+              <div className="profile-details ">
                 <strong>Description:</strong>{" "}
                 {isEditing ? (
                   <input
