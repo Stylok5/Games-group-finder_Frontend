@@ -270,8 +270,8 @@ There are occasional internal server errors when refreshing or navigating pages,
 Some of my future content plans:
 
 - Refactoring code to make it more concise, DRY, and easier to read.
-- Implementing the like and dislike functionality correctly
-- Further improving upon the styling and responsiveness
+- Implementing the like and dislike functionality correctly.**done** (update: Find a way to save user's choice when refreshing the page, possibly using localstorage)
+- Further improving upon the styling and responsiveness **done**
 - Enabling users to send friend requests and messages to each other
 - Adding more information about each game, such as links to purchase sites and real-time data from Steam charts regarding the number of players currently in game
 
